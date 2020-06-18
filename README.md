@@ -1,6 +1,8 @@
 PHP Trello API v1 client
 ========================
 
+![tests](https://github.com/semaio/php-trello-api/workflows/run-tests/badge.svg?branch=master)
+
 This library is based on the great [php-trello-api](https://github.com/cdaguerre/php-trello-api/) but updated and modernized for usage with PHP 7.3+ and a modern version of Guzzle.
 
 **Important:** Not all components have been thoroughly tested, especially the webhook behaviour.
