@@ -1,0 +1,45 @@
+imports:
+  - { resource: 'vendor/symplify/easy-coding-standard/config/set/psr12.yaml' }
+  - { resource: 'vendor/symplify/easy-coding-standard/config/set/symfony.yaml' }
+  - { resource: 'vendor/symplify/easy-coding-standard/config/set/common/array.yaml' }
+  - { resource: 'vendor/symplify/easy-coding-standard/config/set/common/control-structures.yaml' }
+  - { resource: 'vendor/symplify/easy-coding-standard/config/set/common/strict.yaml' }
+
+services:
+  PhpCsFixer\Fixer\CastNotation\ModernizeTypesCastingFixer: ~
+  PhpCsFixer\Fixer\ClassNotation\ClassAttributesSeparationFixer:
+    elements: ['property', 'method']
+  PhpCsFixer\Fixer\FunctionNotation\MethodArgumentSpaceFixer:
+    on_multiline: 'ensure_fully_multiline'
+  PhpCsFixer\Fixer\FunctionNotation\NullableTypeDeclarationForDefaultNullValueFixer: ~
+  PhpCsFixer\Fixer\FunctionNotation\VoidReturnFixer: ~
+  PhpCsFixer\Fixer\Operator\ConcatSpaceFixer: ~
+  PhpCsFixer\Fixer\Phpdoc\GeneralPhpdocAnnotationRemoveFixer:
+    annotations: ['copyright', 'category']
+  PhpCsFixer\Fixer\Phpdoc\NoSuperfluousPhpdocTagsFixer: ~
+  PhpCsFixer\Fixer\Phpdoc\PhpdocOrderFixer: ~
+  PhpCsFixer\Fixer\PhpUnit\PhpUnitConstructFixer: ~
+  PhpCsFixer\Fixer\PhpUnit\PhpUnitDedicateAssertFixer:
+    target: 'newest'
+  PhpCsFixer\Fixer\PhpUnit\PhpUnitDedicateAssertInternalTypeFixer: ~
+  PhpCsFixer\Fixer\PhpUnit\PhpUnitMockFixer: ~
+  PhpCsFixer\Fixer\PhpUnit\PhpUnitMockShortWillReturnFixer: ~
+  PhpCsFixer\Fixer\PhpUnit\PhpUnitTestCaseStaticMethodCallsFixer: ~
+  PhpCsFixer\Fixer\ReturnNotation\NoUselessReturnFixer: ~
+  PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer: ~
+  PhpCsFixer\Fixer\Whitespace\CompactNullableTypehintFixer: ~
+  PhpCsFixerCustomFixers\Fixer\NoImportFromGlobalNamespaceFixer: ~
+  PhpCsFixerCustomFixers\Fixer\NoSuperfluousConcatenationFixer: ~
+  PhpCsFixerCustomFixers\Fixer\NoUselessCommentFixer: ~
+  PhpCsFixerCustomFixers\Fixer\OperatorLinebreakFixer: ~
+  PhpCsFixerCustomFixers\Fixer\PhpdocNoIncorrectVarAnnotationFixer: ~
+  PhpCsFixerCustomFixers\Fixer\SingleSpaceAfterStatementFixer: ~
+
+parameters:
+  cache_directory: 'build/ecs/'
+  cache_namespace: 'project'
+  skip:
+    PhpCsFixer\Fixer\PhpUnit\PhpUnitMethodCasingFixer: null
+  paths:
+    - 'src'
+    - 'tests'
