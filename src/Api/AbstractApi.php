@@ -43,14 +43,14 @@ abstract class AbstractApi implements ApiInterface
      * @param string $method    called method
      * @param array  $arguments array of arguments passed to called method
      *
-     * @throws BadMethodCallException If the method does not start with "get"
+     *@throws BadMethodCallException If the method does not start with "get"
      *                                or the field is not included in the $fields property
      *
      * @return array
      */
-    public function __call($method, $arguments)
+    public function __call(string $method, array $arguments)
     {
-        if (isset($this->fields) && substr($method, 0, 3) === 'get') {
+        if (isset($this->fields) && strpos($method, 'get') === 0) {
             $property = lcfirst(substr($method, 3));
             if (in_array($property, $this->fields, true) && count($arguments) === 2) {
                 return $this->getField($arguments[0], $arguments[1]);
@@ -85,7 +85,7 @@ abstract class AbstractApi implements ApiInterface
 
         // TODO: Validate
 
-        return isset($response['_value']) ? $response['_value'] : $response;
+        return $response['_value'] ?? $response;
     }
 
     public function get(string $uri, array $parameters = [], array $headers = []): array
@@ -95,7 +95,9 @@ abstract class AbstractApi implements ApiInterface
 
     public function head(string $uri, array $parameters = [], array $headers = []): array
     {
-        return $this->client->head($uri, ['query' => $parameters], $headers);
+        return $this->client->head($uri, [
+            'query' => $parameters,
+        ], $headers);
     }
 
     public function post(string $uri, array $parameters = [], array $headers = []): array
@@ -211,10 +213,8 @@ abstract class AbstractApi implements ApiInterface
      * @param array    $parameters   array to check
      *
      * @throws MissingArgumentException
-     *
-     * @return bool
      */
-    protected function validateAtLeastOneOf(array $atLeastOneOf, array $parameters)
+    protected function validateAtLeastOneOf(array $atLeastOneOf, array $parameters): bool
     {
         foreach ($atLeastOneOf as $parameter) {
             if (isset($parameters[$parameter])) {

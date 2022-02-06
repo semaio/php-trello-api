@@ -35,7 +35,10 @@ class ChecklistItemsApiTest extends ApiTestCase
      */
     public function shouldUpdateItem(): void
     {
-        $response = ['name' => 'Test item', 'state' => 'complete'];
+        $response = [
+            'name' => 'Test item',
+            'state' => 'complete',
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())

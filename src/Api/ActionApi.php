@@ -44,7 +44,7 @@ class ActionApi extends AbstractApi
     }
 
     /**
-     * Remove a action.
+     * Remove an action.
      *
      * @see https://trello.com/docs/api/action/#delete-1-actions-idaction
      */
@@ -192,6 +192,8 @@ class ActionApi extends AbstractApi
      */
     public function setText(string $id, string $text): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/text', ['value' => $text]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/text', [
+            'value' => $text,
+        ]);
     }
 }

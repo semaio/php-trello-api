@@ -52,7 +52,9 @@ class CardAttachmentsApiTest extends ApiTestCase
      */
     public function shouldCreateAttachment(): void
     {
-        $data = ['url' => 'http://www.test.com/image.jpg'];
+        $data = [
+            'url' => 'http://www.test.com/image.jpg',
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())

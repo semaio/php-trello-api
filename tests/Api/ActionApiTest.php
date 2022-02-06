@@ -19,7 +19,9 @@ class ActionApiTest extends ApiTestCase
      */
     public function shouldShowAction(): void
     {
-        $response = ['id' => $this->fakeId];
+        $response = [
+            'id' => $this->fakeId,
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())
@@ -35,7 +37,9 @@ class ActionApiTest extends ApiTestCase
      */
     public function shouldUpdateAction(): void
     {
-        $response = ['id' => $this->fakeId];
+        $response = [
+            'id' => $this->fakeId,
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())

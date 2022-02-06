@@ -36,7 +36,9 @@ class CardChecklistsApiTest extends ApiTestCase
      */
     public function shouldCreateChecklist(): void
     {
-        $data = ['name' => 'Test checklist'];
+        $data = [
+            'name' => 'Test checklist',
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())
@@ -99,7 +101,10 @@ class CardChecklistsApiTest extends ApiTestCase
      */
     public function shouldUpdateItem(): void
     {
-        $item = ['name' => 'Test', 'state' => true];
+        $item = [
+            'name' => 'Test',
+            'state' => true,
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())
@@ -115,7 +120,10 @@ class CardChecklistsApiTest extends ApiTestCase
      */
     public function shouldCreateItem(): void
     {
-        $item = ['name' => 'Test', 'state' => true];
+        $item = [
+            'name' => 'Test',
+            'state' => true,
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())

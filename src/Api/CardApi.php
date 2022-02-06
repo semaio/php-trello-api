@@ -70,6 +70,8 @@ class CardApi extends AbstractApi
      * Create a card.
      *
      * @see https://trello.com/docs/api/card/#post-1-cards
+     *
+     * @throws \Semaio\TrelloApi\Exception\MissingArgumentException
      */
     public function create(array $params = []): array
     {
@@ -102,7 +104,9 @@ class CardApi extends AbstractApi
      */
     public function setBoard(string $id, string $boardId): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/idBoard', ['value' => $boardId]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/idBoard', [
+            'value' => $boardId,
+        ]);
     }
 
     /**
@@ -134,7 +138,9 @@ class CardApi extends AbstractApi
      */
     public function setList(string $id, string $listId): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/idList', ['value' => $listId]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/idList', [
+            'value' => $listId,
+        ]);
     }
 
     /**
@@ -166,7 +172,9 @@ class CardApi extends AbstractApi
      */
     public function setName(string $id, string $name): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/name', ['value' => $name]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/name', [
+            'value' => $name,
+        ]);
     }
 
     /**
@@ -176,7 +184,9 @@ class CardApi extends AbstractApi
      */
     public function setDescription(string $id, string $description): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/desc', ['value' => $description]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/desc', [
+            'value' => $description,
+        ]);
     }
 
     /**
@@ -186,7 +196,9 @@ class CardApi extends AbstractApi
      */
     public function setClosed(string $id, bool $closed = true): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/closed', ['value' => $closed]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/closed', [
+            'value' => $closed,
+        ]);
     }
 
     /**
@@ -196,7 +208,9 @@ class CardApi extends AbstractApi
      */
     public function setDueDate(string $id, \DateTime $date): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/due', ['value' => $date]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/due', [
+            'value' => $date,
+        ]);
     }
 
     /**
@@ -206,7 +220,9 @@ class CardApi extends AbstractApi
      */
     public function setPosition(string $id, string $position): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/pos', ['value' => $position]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/pos', [
+            'value' => $position,
+        ]);
     }
 
     /**
@@ -216,7 +232,9 @@ class CardApi extends AbstractApi
      */
     public function setPositionNumber(string $id, int $position): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/pos', ['value' => $position]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/pos', [
+            'value' => $position,
+        ]);
     }
 
     /**
@@ -226,7 +244,9 @@ class CardApi extends AbstractApi
      */
     public function setSubscribed(string $id, bool $subscribed): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/subscribed', ['value' => $subscribed]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/subscribed', [
+            'value' => $subscribed,
+        ]);
     }
 
     public function actions(): CardActionsApi

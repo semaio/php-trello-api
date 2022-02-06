@@ -24,7 +24,9 @@ class CardListApiTest extends ApiTestCase
      */
     public function shouldShowList(): void
     {
-        $response = ['id' => $this->fakeListId];
+        $response = [
+            'id' => $this->fakeListId,
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())
@@ -61,7 +63,9 @@ class CardListApiTest extends ApiTestCase
     {
         $this->expectException(MissingArgumentException::class);
 
-        $data = ['idBoard' => $this->fakeId('board')];
+        $data = [
+            'idBoard' => $this->fakeId('board'),
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::never())->method('post');
@@ -76,7 +80,9 @@ class CardListApiTest extends ApiTestCase
     {
         $this->expectException(MissingArgumentException::class);
 
-        $data = ['name' => 'Test List'];
+        $data = [
+            'name' => 'Test List',
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::never())->method('post');
@@ -89,7 +95,9 @@ class CardListApiTest extends ApiTestCase
      */
     public function shouldUpdateList(): void
     {
-        $response = ['name' => 'Test List'];
+        $response = [
+            'name' => 'Test List',
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())

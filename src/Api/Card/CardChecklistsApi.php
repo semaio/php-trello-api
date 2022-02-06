@@ -29,6 +29,8 @@ class CardChecklistsApi extends AbstractApi
      * Add a checklist to a given card.
      *
      * @see https://trello.com/docs/api/card/#post-1-cards-card-id-or-shortlink-checklists
+     *
+     * @throws \Semaio\TrelloApi\Exception\MissingArgumentException
      */
     public function create(string $id, array $params): array
     {

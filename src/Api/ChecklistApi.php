@@ -40,6 +40,8 @@ class ChecklistApi extends AbstractApi
      * Create a checklist.
      *
      * @see https://trello.com/docs/api/checklist/#post-1-checklists
+     *
+     * @throws \Semaio\TrelloApi\Exception\MissingArgumentException
      */
     public function create(array $params = []): array
     {
@@ -97,7 +99,9 @@ class ChecklistApi extends AbstractApi
      */
     public function setCard(string $id, string $cardId): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/idCard', ['value' => $cardId]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/idCard', [
+            'value' => $cardId,
+        ]);
     }
 
     /**
@@ -107,7 +111,9 @@ class ChecklistApi extends AbstractApi
      */
     public function setName(string $id, string $name): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/name', ['value' => $name]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/name', [
+            'value' => $name,
+        ]);
     }
 
     /**
@@ -115,9 +121,11 @@ class ChecklistApi extends AbstractApi
      *
      * @see https://trello.com/docs/api/checklist/#put-1-checklists-idchecklist-pos
      */
-    public function setPosition(string $id, string $position)
+    public function setPosition(string $id, string $position): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/pos', ['value' => $position]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/pos', [
+            'value' => $position,
+        ]);
     }
 
     /**
@@ -125,9 +133,11 @@ class ChecklistApi extends AbstractApi
      *
      * @see https://trello.com/docs/api/checklist/#put-1-checklists-idchecklist-pos
      */
-    public function setPositionNumber(string $id, int $position)
+    public function setPositionNumber(string $id, int $position): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/pos', ['value' => $position]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/pos', [
+            'value' => $position,
+        ]);
     }
 
     public function cards(): ChecklistCardsApi

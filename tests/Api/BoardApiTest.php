@@ -32,7 +32,9 @@ class BoardApiTest extends ApiTestCase
      */
     public function shouldShowBoard(): void
     {
-        $response = ['id' => $this->fakeBoardId];
+        $response = [
+            'id' => $this->fakeBoardId,
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())
@@ -48,7 +50,9 @@ class BoardApiTest extends ApiTestCase
      */
     public function shouldCreateBoard(): void
     {
-        $response = ['name' => 'Test Board'];
+        $response = [
+            'name' => 'Test Board',
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())
@@ -66,7 +70,9 @@ class BoardApiTest extends ApiTestCase
     {
         $this->expectException(MissingArgumentException::class);
 
-        $data = ['desc' => 'Test Board Description'];
+        $data = [
+            'desc' => 'Test Board Description',
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::never())->method('post');
@@ -79,7 +85,9 @@ class BoardApiTest extends ApiTestCase
      */
     public function shouldUpdateBoard(): void
     {
-        $response = ['name' => 'Test Board'];
+        $response = [
+            'name' => 'Test Board',
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())

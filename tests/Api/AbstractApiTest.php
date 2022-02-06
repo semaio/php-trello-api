@@ -21,12 +21,20 @@ class AbstractApiTest extends TestCase
         $httpClient = $this->getTrelloClientMock();
         $httpClient->expects(static::any())
             ->method('get')
-            ->with('/path', ['param1' => 'param1value'], ['header1' => 'header1value'])
+            ->with('/path', [
+                'param1' => 'param1value',
+            ], [
+                'header1' => 'header1value',
+            ])
             ->willReturn($response);
 
         $api = new AbstractApiFake($httpClient);
 
-        static::assertEquals($response, $api->get('/path', ['param1' => 'param1value'], ['header1' => 'header1value']));
+        static::assertEquals($response, $api->get('/path', [
+            'param1' => 'param1value',
+        ], [
+            'header1' => 'header1value',
+        ]));
     }
 
     /**
@@ -39,12 +47,20 @@ class AbstractApiTest extends TestCase
         $httpClient = $this->getTrelloClientMock();
         $httpClient->expects(static::once())
             ->method('post')
-            ->with('/path', ['param1' => 'param1value'], ['option1' => 'option1value'])
+            ->with('/path', [
+                'param1' => 'param1value',
+            ], [
+                'option1' => 'option1value',
+            ])
             ->willReturn($response);
 
         $api = new AbstractApiFake($httpClient);
 
-        static::assertEquals($response, $api->post('/path', ['param1' => 'param1value'], ['option1' => 'option1value']));
+        static::assertEquals($response, $api->post('/path', [
+            'param1' => 'param1value',
+        ], [
+            'option1' => 'option1value',
+        ]));
     }
 
     /**
@@ -57,12 +73,20 @@ class AbstractApiTest extends TestCase
         $httpClient = $this->getTrelloClientMock();
         $httpClient->expects(static::once())
             ->method('patch')
-            ->with('/path', ['param1' => 'param1value'], ['option1' => 'option1value'])
+            ->with('/path', [
+                'param1' => 'param1value',
+            ], [
+                'option1' => 'option1value',
+            ])
             ->willReturn($response);
 
         $api = new AbstractApiFake($httpClient);
 
-        static::assertEquals($response, $api->patch('/path', ['param1' => 'param1value'], ['option1' => 'option1value']));
+        static::assertEquals($response, $api->patch('/path', [
+            'param1' => 'param1value',
+        ], [
+            'option1' => 'option1value',
+        ]));
     }
 
     /**
@@ -75,12 +99,20 @@ class AbstractApiTest extends TestCase
         $httpClient = $this->getTrelloClientMock();
         $httpClient->expects(static::once())
             ->method('put')
-            ->with('/path', ['param1' => 'param1value'], ['option1' => 'option1value'])
+            ->with('/path', [
+                'param1' => 'param1value',
+            ], [
+                'option1' => 'option1value',
+            ])
             ->willReturn($response);
 
         $api = new AbstractApiFake($httpClient);
 
-        static::assertEquals($response, $api->put('/path', ['param1' => 'param1value'], ['option1' => 'option1value']));
+        static::assertEquals($response, $api->put('/path', [
+            'param1' => 'param1value',
+        ], [
+            'option1' => 'option1value',
+        ]));
     }
 
     /**
@@ -93,12 +125,20 @@ class AbstractApiTest extends TestCase
         $httpClient = $this->getTrelloClientMock();
         $httpClient->expects(static::once())
             ->method('delete')
-            ->with('/path', ['param1' => 'param1value'], ['option1' => 'option1value'])
+            ->with('/path', [
+                'param1' => 'param1value',
+            ], [
+                'option1' => 'option1value',
+            ])
             ->willReturn($response);
 
         $api = new AbstractApiFake($httpClient);
 
-        static::assertEquals($response, $api->delete('/path', ['param1' => 'param1value'], ['option1' => 'option1value']));
+        static::assertEquals($response, $api->delete('/path', [
+            'param1' => 'param1value',
+        ], [
+            'option1' => 'option1value',
+        ]));
     }
 
     /**

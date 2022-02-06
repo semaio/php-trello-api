@@ -29,6 +29,8 @@ class CardAttachmentsApi extends AbstractApi
      * Add an attachment to a given card.
      *
      * @see https://trello.com/docs/api/card/#post-1-cards-card-id-or-shortlink-attachments
+     *
+     * @throws \Semaio\TrelloApi\Exception\MissingArgumentException
      */
     public function create(string $id, array $params): array
     {
@@ -65,6 +67,8 @@ class CardAttachmentsApi extends AbstractApi
      */
     public function setAsCover(string $id, string $attachmentId): array
     {
-        return $this->put('cards/'.rawurlencode($id).'/idAttachmentCover', ['value' => $attachmentId]);
+        return $this->put('cards/'.rawurlencode($id).'/idAttachmentCover', [
+            'value' => $attachmentId,
+        ]);
     }
 }

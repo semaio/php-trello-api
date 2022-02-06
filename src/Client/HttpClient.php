@@ -56,16 +56,18 @@ class HttpClient implements HttpClientInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \Psr\Http\Client\ClientExceptionInterface
      */
     public function sendRequest(string $httpMethod, $uri, array $headers = [], $body = null): ResponseInterface
     {
         $request = $this->requestFactory->createRequest($httpMethod, $uri);
 
-        if ($body !== null && is_string($body)) {
+        if (is_string($body)) {
             $request = $request->withBody($this->streamFactory->createStream($body));
         }
 
-        if ($body !== null && $body instanceof StreamInterface) {
+        if ($body instanceof StreamInterface) {
             $request = $request->withBody($body);
         }
 
@@ -74,8 +76,7 @@ class HttpClient implements HttpClientInterface
         }
 
         $response = $this->baseHttpClient->sendRequest($request);
-        $response = $this->httpExceptionHandler->handle($request, $response);
 
-        return $response;
+        return $this->httpExceptionHandler->handle($request, $response);
     }
 }

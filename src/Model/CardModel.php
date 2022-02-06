@@ -693,7 +693,9 @@ class CardModel extends AbstractModel implements CardModelInterface
             throw new InvalidArgumentException(sprintf('Card %s already has the %s label.', $this->getName(), $color));
         }
 
-        $this->data['labels'][] = ['color' => $color];
+        $this->data['labels'][] = [
+            'color' => $color,
+        ];
 
         return $this;
     }

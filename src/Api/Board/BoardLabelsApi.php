@@ -60,7 +60,9 @@ class BoardLabelsApi extends AbstractApi
             throw new InvalidArgumentException(sprintf('The "color" parameter must be one of "%s".', implode(', ', $colors)));
         }
 
-        return $this->put('boards/'.rawurlencode($id).'/labelNames/'.rawurlencode($color), ['value' => $name]);
+        return $this->put('boards/'.rawurlencode($id).'/labelNames/'.rawurlencode($color), [
+            'value' => $name,
+        ]);
     }
 
     /**
@@ -76,6 +78,9 @@ class BoardLabelsApi extends AbstractApi
             throw new InvalidArgumentException(sprintf('The "color" parameter must be one of "%s".', implode(', ', $colors)));
         }
 
-        return $this->post('boards/'.rawurlencode($id).'/labels/', ['name' => $name, 'color' => $color]);
+        return $this->post('boards/'.rawurlencode($id).'/labels/', [
+            'name' => $name,
+            'color' => $color,
+        ]);
     }
 }

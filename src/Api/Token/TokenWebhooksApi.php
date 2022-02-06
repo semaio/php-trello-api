@@ -39,6 +39,8 @@ class TokenWebhooksApi extends AbstractApi
      * Create a webhook.
      *
      * @see https://trello.com/docs/api/token/#post-1-tokens-token-webhooks
+     *
+     * @throws \Semaio\TrelloApi\Exception\MissingArgumentException
      */
     public function create(string $id, array $data): array
     {
@@ -51,6 +53,8 @@ class TokenWebhooksApi extends AbstractApi
      * Update a webhook.
      *
      * @see https://trello.com/docs/api/token/#put-1-tokens-token-webhooks
+     *
+     * @throws \Semaio\TrelloApi\Exception\MissingArgumentException
      */
     public function update(string $id, array $data): array
     {

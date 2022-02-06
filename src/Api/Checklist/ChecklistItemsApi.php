@@ -50,6 +50,8 @@ class ChecklistItemsApi extends AbstractApi
      * Update an item in the given checklist.
      *
      * TODO: There is no put method on checklist items, so this is a dirty workaround which works by deleting the item and recreating it.
+     *
+     * @throws \Semaio\TrelloApi\Exception\MissingArgumentException
      */
     public function update(string $id, string $itemId, array $data, bool $isChecked = false): array
     {

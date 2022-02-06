@@ -52,7 +52,7 @@ class MemberBoardsApi extends AbstractApi
     }
 
     /**
-     * Get boads a given member is invited to.
+     * Get boards a given member is invited to.
      *
      * @see https://trello.com/docs/api/member/#get-1-members-idmember-or-username-boardsinvited
      */
@@ -62,7 +62,7 @@ class MemberBoardsApi extends AbstractApi
     }
 
     /**
-     * Get a field of a boad a given member is invited to.
+     * Get a field of a board a given member is invited to.
      *
      * @see https://trello.com/docs/api/member/#get-1-members-idmember-or-username-boardsinvited-field
      */
@@ -74,17 +74,19 @@ class MemberBoardsApi extends AbstractApi
     }
 
     /**
-     * Pin a boad for a given member.
+     * Pin a board for a given member.
      *
      * @see https://trello.com/docs/api/member/#post-1-members-idmember-or-username-idboardspinned
      */
     public function pin(string $id, string $boardId): array
     {
-        return $this->post('members/'.rawurlencode($id).'/idBoardsPinned', ['value' => $boardId]);
+        return $this->post('members/'.rawurlencode($id).'/idBoardsPinned', [
+            'value' => $boardId,
+        ]);
     }
 
     /**
-     * Unpin a boad for a given member.
+     * Unpin a board for a given member.
      *
      * @see https://trello.com/docs/api/member/#delete-1-members-idmember-or-username-idboardspinned-idboard
      */
@@ -95,20 +97,16 @@ class MemberBoardsApi extends AbstractApi
 
     /**
      * Board Backgrounds API.
-     *
-     * @return MemberBoardBackgroundsApi
      */
-    public function backgrounds()
+    public function backgrounds(): MemberBoardBackgroundsApi
     {
         return new MemberBoardBackgroundsApi($this->client);
     }
 
     /**
      * Board Stars API.
-     *
-     * @return MemberBoardStarsApi
      */
-    public function stars()
+    public function stars(): MemberBoardStarsApi
     {
         return new MemberBoardStarsApi($this->client);
     }

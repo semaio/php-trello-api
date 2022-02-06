@@ -69,6 +69,8 @@ class BoardApi extends AbstractApi
      * Create a board.
      *
      * @see https://trello.com/docs/api/board/#post-1-boards
+     *
+     * @throws \Semaio\TrelloApi\Exception\MissingArgumentException
      */
     public function create(array $params = []): array
     {
@@ -94,7 +96,9 @@ class BoardApi extends AbstractApi
      */
     public function setName(string $id, string $name): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/name', ['value' => $name]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/name', [
+            'value' => $name,
+        ]);
     }
 
     /**
@@ -104,7 +108,9 @@ class BoardApi extends AbstractApi
      */
     public function setDescription(string $id, string $description): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/desc', ['value' => $description]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/desc', [
+            'value' => $description,
+        ]);
     }
 
     /**
@@ -114,7 +120,9 @@ class BoardApi extends AbstractApi
      */
     public function setClosed(string $id, bool $closed = true): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/closed', ['value' => $closed]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/closed', [
+            'value' => $closed,
+        ]);
     }
 
     /**
@@ -122,9 +130,11 @@ class BoardApi extends AbstractApi
      *
      * @see https://trello.com/docs/api/board/#put-1-boards-board-id-subscribed
      */
-    public function setSubscribed(string $id, bool $subscribed = true)
+    public function setSubscribed(string $id, bool $subscribed = true): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/subscribed', ['value' => $subscribed]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/subscribed', [
+            'value' => $subscribed,
+        ]);
     }
 
     /**

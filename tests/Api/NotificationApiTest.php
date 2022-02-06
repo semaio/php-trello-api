@@ -19,7 +19,9 @@ class NotificationApiTest extends ApiTestCase
      */
     public function shouldShowNotification(): void
     {
-        $response = ['id' => $this->fakeId];
+        $response = [
+            'id' => $this->fakeId,
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())
@@ -35,7 +37,9 @@ class NotificationApiTest extends ApiTestCase
      */
     public function shouldUpdateNotification(): void
     {
-        $response = ['id' => $this->fakeId];
+        $response = [
+            'id' => $this->fakeId,
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())
@@ -51,7 +55,9 @@ class NotificationApiTest extends ApiTestCase
      */
     public function shouldSetUnread(): void
     {
-        $response = ['id' => $this->fakeId];
+        $response = [
+            'id' => $this->fakeId,
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())

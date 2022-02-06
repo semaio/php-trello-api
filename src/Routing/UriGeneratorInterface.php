@@ -9,5 +9,8 @@ namespace Semaio\TrelloApi\Routing;
  */
 interface UriGeneratorInterface
 {
+    /**
+     * Generate the uri string.
+     */
     public function generate(string $path, array $queryParameters = []): string;
 }

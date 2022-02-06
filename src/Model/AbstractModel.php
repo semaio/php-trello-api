@@ -39,7 +39,9 @@ abstract class AbstractModel
      *
      * @var array
      */
-    protected $loadParams = ['fields' => 'all'];
+    protected $loadParams = [
+        'fields' => 'all',
+    ];
 
     /**
      * @var string
@@ -63,12 +65,12 @@ abstract class AbstractModel
         }
     }
 
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
 
-    public function refresh()
+    public function refresh(): self
     {
         $this->preRefresh();
         $this->data = $this->api->show($this->id, $this->loadParams);
@@ -77,7 +79,7 @@ abstract class AbstractModel
         return $this;
     }
 
-    public function save()
+    public function save(): self
     {
         try {
             $this->preSave();
@@ -90,7 +92,7 @@ abstract class AbstractModel
         return $this->refresh();
     }
 
-    public function remove()
+    public function remove(): self
     {
         try {
             $this->preRemove();
@@ -103,12 +105,12 @@ abstract class AbstractModel
         return $this;
     }
 
-    public function getData()
+    public function getData(): array
     {
         return $this->data;
     }
 
-    public function setData(array $data)
+    public function setData(array $data): self
     {
         $this->data = $data;
 
@@ -117,10 +119,8 @@ abstract class AbstractModel
 
     /**
      * Update the object through API.
-     *
-     * @return AbstractModel
      */
-    protected function update()
+    protected function update(): self
     {
         $this->preUpdate();
         $this->data = $this->api->update($this->id, $this->data);
@@ -131,10 +131,8 @@ abstract class AbstractModel
 
     /**
      * Create the object through API.
-     *
-     * @return AbstractModel
      */
-    protected function create()
+    protected function create(): self
     {
         $this->preCreate();
         $this->data = $this->api->create($this->data);

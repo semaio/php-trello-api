@@ -26,9 +26,11 @@ class BoardChecklistsApi extends AbstractApi
     }
 
     /**
-     * Add an checklist to a given board.
+     * Add a checklist to a given board.
      *
      * @see https://trello.com/docs/api/board/#post-1-boards-board-id-checklists
+     *
+     * @throws \Semaio\TrelloApi\Exception\MissingArgumentException
      */
     public function create(string $id, array $params): array
     {

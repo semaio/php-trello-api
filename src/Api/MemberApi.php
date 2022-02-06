@@ -103,7 +103,9 @@ class MemberApi extends AbstractApi
      */
     public function setAvatarSource(string $id, string $avatarSource): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/avatarSource', ['value' => $avatarSource]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/avatarSource', [
+            'value' => $avatarSource,
+        ]);
     }
 
     /**
@@ -113,7 +115,9 @@ class MemberApi extends AbstractApi
      */
     public function setBio(string $id, string $bio): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/bio', ['value' => $bio]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/bio', [
+            'value' => $bio,
+        ]);
     }
 
     /**
@@ -123,7 +127,9 @@ class MemberApi extends AbstractApi
      */
     public function setFullName(string $id, string $fullName): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/fullName', ['value' => $fullName]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/fullName', [
+            'value' => $fullName,
+        ]);
     }
 
     /**
@@ -133,7 +139,9 @@ class MemberApi extends AbstractApi
      */
     public function setInitials(string $id, string $initials): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/initials', ['value' => $initials]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/initials', [
+            'value' => $initials,
+        ]);
     }
 
     /**
@@ -143,7 +151,9 @@ class MemberApi extends AbstractApi
      */
     public function setUsername(string $id, string $username): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/username', ['value' => $username]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/username', [
+            'value' => $username,
+        ]);
     }
 
     /**
@@ -153,7 +163,9 @@ class MemberApi extends AbstractApi
      */
     public function setAvatar(string $id, string $file): array
     {
-        return $this->post($this->getPath().'/'.rawurlencode($id).'/avatar', ['file' => $file]);
+        return $this->post($this->getPath().'/'.rawurlencode($id).'/avatar', [
+            'file' => $file,
+        ]);
     }
 
     public function actions(): MemberActionsApi
@@ -166,32 +178,32 @@ class MemberApi extends AbstractApi
         return new MemberBoardsApi($this->client);
     }
 
-    public function cards()
+    public function cards(): MemberCardsApi
     {
         return new MemberCardsApi($this->client);
     }
 
-    public function notifications()
+    public function notifications(): MemberNotificationsApi
     {
         return new MemberNotificationsApi($this->client);
     }
 
-    public function organizations()
+    public function organizations(): MemberOrganizationsApi
     {
         return new MemberOrganizationsApi($this->client);
     }
 
-    public function customBackgrounds()
+    public function customBackgrounds(): MemberCustomBackgroundsApi
     {
         return new MemberCustomBackgroundsApi($this->client);
     }
 
-    public function customEmoji()
+    public function customEmoji(): MemberCustomEmojiApi
     {
         return new MemberCustomEmojiApi($this->client);
     }
 
-    public function customStickers()
+    public function customStickers(): MemberCustomStickersApi
     {
         return new MemberCustomStickersApi($this->client);
     }
