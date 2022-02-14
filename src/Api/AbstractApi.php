@@ -160,10 +160,10 @@ abstract class AbstractApi implements ApiInterface
         return $parameters;
     }
 
-    protected function getPath(?string $id = null): string
+    protected function getPath(?string $id = null, ?string $customPath = null): string
     {
         if ($id !== null) {
-            return preg_replace('/\#id\#/', $id, $this->path);
+            return preg_replace('/\#id\#/', $id, $customPath ?? $this->path);
         }
 
         return $this->path;
