@@ -36,7 +36,9 @@ class BoardChecklistsApiTest extends ApiTestCase
      */
     public function shouldCreateChecklist(): void
     {
-        $data = ['name' => 'Test Checklist'];
+        $data = [
+            'name' => 'Test Checklist',
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())

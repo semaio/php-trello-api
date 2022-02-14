@@ -33,15 +33,17 @@ class CardStickersApi extends AbstractApi
     public function show(string $id, string $stickerId, string $fields = 'all'): array
     {
         $allowed = ['all', 'image', 'imageScaled', 'imageUrl', 'left', 'rotate', 'top', 'zIndex'];
-        $fields = $this->validateAllowedParameter($allowed, $fields, 'field');
+        $fieldsArray = $this->validateAllowedParameter($allowed, $fields, 'field');
 
-        return $this->get($this->getPath($id).'/'.rawurlencode($stickerId), $fields);
+        return $this->get($this->getPath($id).'/'.rawurlencode($stickerId), $fieldsArray);
     }
 
     /**
      * Update a given sticker on a given card.
      *
      * @see https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-stickers-idsticker
+     *
+     * @throws \Semaio\TrelloApi\Exception\MissingArgumentException
      */
     public function update(string $id, string $stickerId, array $params): array
     {
@@ -55,6 +57,8 @@ class CardStickersApi extends AbstractApi
      * Create a given sticker on a given card.
      *
      * @see https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-stickers-idsticker
+     *
+     * @throws \Semaio\TrelloApi\Exception\MissingArgumentException
      */
     public function create(string $id, array $params): array
     {

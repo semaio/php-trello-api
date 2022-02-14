@@ -29,7 +29,9 @@ class CardLabelsApi extends AbstractApi
             }
         }
 
-        return $this->put($this->getPath($id), ['value' => implode(',', $labels)]);
+        return $this->put($this->getPath($id), [
+            'value' => implode(',', $labels),
+        ]);
     }
 
     /**

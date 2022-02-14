@@ -28,7 +28,7 @@ interface ConfigurationInterface
 
     /**
      * Constant for authentication method. Indicates the new login method with
-     * with username and token via HTTP Authentication.
+     * username and token via HTTP Authentication.
      */
     public const AUTH_HTTP_TOKEN = 'http_token';
 }

@@ -7,7 +7,7 @@
   ],
   "license": "MIT",
   "require": {
-    "php": "^7.3",
+    "php": "^7.3 | ^8.0",
     "php-http/discovery": "^1.6",
     "psr/http-client": "^1.0",
     "psr/http-factory": "^1.0",
@@ -20,7 +20,8 @@
     "phpunit/phpunit": "^9.0",
     "symfony/event-dispatcher": "^4.4|^5.0",
     "symfony/http-foundation": "^4.4|^5.0",
-    "symplify/easy-coding-standard": "^8.0"
+    "symplify/easy-coding-standard": "^8.0",
+    "symplify/config-transformer": "^10.0"
   },
   "suggest": {
     "symfony/event-dispatcher": "Symfony Event Dispatcher for the Trello webhook service.",
@@ -45,10 +46,15 @@
       "./vendor/bin/phpunit --coverage-clover build/logs/clover.xml"
     ],
     "cs-check": [
-      "./vendor/bin/ecs -c .php-cs.yml check"
+      "./vendor/bin/ecs -c .php-cs.php check"
     ],
     "cs-fix": [
-      "./vendor/bin/ecs -c .php-cs.yml check --fix"
+      "./vendor/bin/ecs -c .php-cs.php check --fix"
     ]
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
   }
 }

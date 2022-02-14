@@ -22,7 +22,9 @@ class TokenApiTest extends ApiTestCase
      */
     public function shouldShowToken(): void
     {
-        $response = ['id' => $this->fakeId];
+        $response = [
+            'id' => $this->fakeId,
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())

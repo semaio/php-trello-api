@@ -11,7 +11,7 @@ class OrganizationBoardsApi extends AbstractApi
     protected $path = 'organization/#id#/boards';
 
     /**
-     * Get boads related to a given organization.
+     * Get boards related to a given organization.
      *
      * @see https://trello.com/docs/api/organization/#get-1-organizations-idorganization-or-username-boards
      */

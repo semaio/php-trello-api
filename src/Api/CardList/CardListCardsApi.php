@@ -82,7 +82,10 @@ class CardListCardsApi extends AbstractApi
      */
     public function moveAll(string $id, string $boardId, string $destListId): array
     {
-        $data = ['idBoard' => $boardId, 'idList' => $destListId];
+        $data = [
+            'idBoard' => $boardId,
+            'idList' => $destListId,
+        ];
 
         return $this->post('lists/'.rawurlencode($id).'/moveAllCards', $data);
     }

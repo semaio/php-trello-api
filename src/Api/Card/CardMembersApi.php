@@ -37,7 +37,9 @@ class CardMembersApi extends AbstractApi
             throw new InvalidArgumentException('You must specify at least one member id.');
         }
 
-        return $this->put($this->getPath($id), ['value' => implode(',', $members)]);
+        return $this->put($this->getPath($id), [
+            'value' => implode(',', $members),
+        ]);
     }
 
     /**
@@ -47,7 +49,9 @@ class CardMembersApi extends AbstractApi
      */
     public function add(string $id, string $memberId): array
     {
-        return $this->post($this->getPath($id), ['value' => $memberId]);
+        return $this->post($this->getPath($id), [
+            'value' => $memberId,
+        ]);
     }
 
     /**
@@ -67,7 +71,9 @@ class CardMembersApi extends AbstractApi
      */
     public function addVote(string $id, string $memberId): array
     {
-        return $this->post($this->getPath($id).'/membersVoted', ['value' => $memberId]);
+        return $this->post($this->getPath($id).'/membersVoted', [
+            'value' => $memberId,
+        ]);
     }
 
     /**

@@ -7,6 +7,6 @@ namespace Semaio\TrelloApi\Exception;
 /**
  * Class UnauthorizedHttpException.
  */
-class UnauthorizedHttpException extends ClientErrorHttpException implements ExceptionInterface
+class UnauthorizedHttpException extends ClientErrorHttpException
 {
 }

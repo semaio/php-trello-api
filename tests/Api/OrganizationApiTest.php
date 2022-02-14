@@ -17,7 +17,9 @@ class OrganizationApiTest extends ApiTestCase
      */
     public function shouldShowOrganization(): void
     {
-        $response = ['id' => '54744b094fef0c7d704ca379'];
+        $response = [
+            'id' => '54744b094fef0c7d704ca379',
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())

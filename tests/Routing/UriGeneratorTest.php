@@ -16,7 +16,7 @@ class UriGeneratorTest extends TestCase
     /**
      * @test
      */
-    public function it_can_generate_url(): void
+    public function itCanGenerateUrl(): void
     {
         $uriGenerator = new UriGenerator(Configuration::create('KEY', 'TOKEN'));
 
@@ -24,7 +24,10 @@ class UriGeneratorTest extends TestCase
             'https://api.trello.com/1/path?query1=value1&query2=value2&key=KEY&token=TOKEN',
             $uriGenerator->generate(
                 'path',
-                ['query1' => 'value1', 'query2' => 'value2']
+                [
+                    'query1' => 'value1',
+                    'query2' => 'value2',
+                ]
             )
         );
     }

@@ -90,7 +90,9 @@ class BoardCardListsApiTest extends ApiTestCase
      */
     public function shouldCreateCardlist(): void
     {
-        $data = ['name' => 'Test list'];
+        $data = [
+            'name' => 'Test list',
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())
@@ -108,7 +110,9 @@ class BoardCardListsApiTest extends ApiTestCase
     {
         $this->expectException(MissingArgumentException::class);
 
-        $data = ['desc' => 'Test description'];
+        $data = [
+            'desc' => 'Test description',
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::never())->method('post');

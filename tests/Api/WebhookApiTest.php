@@ -21,7 +21,9 @@ class WebhookApiTest extends ApiTestCase
      */
     public function shouldShowWebhook(): void
     {
-        $response = ['id' => $this->fakeId];
+        $response = [
+            'id' => $this->fakeId,
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())
@@ -146,7 +148,9 @@ class WebhookApiTest extends ApiTestCase
     {
         $this->expectException(MissingArgumentException::class);
 
-        $data = ['idModel' => $this->fakeId('board')];
+        $data = [
+            'idModel' => $this->fakeId('board'),
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::never())->method('post');
@@ -161,7 +165,9 @@ class WebhookApiTest extends ApiTestCase
     {
         $this->expectException(MissingArgumentException::class);
 
-        $data = ['callbackUrl' => 'http://www.callback.com/'];
+        $data = [
+            'callbackUrl' => 'http://www.callback.com/',
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::never())->method('post');
@@ -195,7 +201,9 @@ class WebhookApiTest extends ApiTestCase
     {
         $this->expectException(MissingArgumentException::class);
 
-        $data = ['idModel' => $this->fakeId('board')];
+        $data = [
+            'idModel' => $this->fakeId('board'),
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::never())->method('post');
@@ -210,7 +218,9 @@ class WebhookApiTest extends ApiTestCase
     {
         $this->expectException(MissingArgumentException::class);
 
-        $data = ['callbackUrl' => 'http://www.callback.com/'];
+        $data = [
+            'callbackUrl' => 'http://www.callback.com/',
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::never())->method('post');

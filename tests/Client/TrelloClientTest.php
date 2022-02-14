@@ -90,7 +90,9 @@ class TrelloClientTest extends TestCase
 
         static::assertEquals(
             $contents,
-            $this->trelloClient->get('path', ['key' => 'value'])
+            $this->trelloClient->get('path', [
+                'key' => 'value',
+            ])
         );
     }
 
@@ -121,7 +123,9 @@ class TrelloClientTest extends TestCase
 
         static::assertEquals(
             $contents,
-            $this->trelloClient->head('path', ['key' => 'value'])
+            $this->trelloClient->head('path', [
+                'key' => 'value',
+            ])
         );
     }
 
@@ -152,7 +156,9 @@ class TrelloClientTest extends TestCase
 
         static::assertEquals(
             $contents,
-            $this->trelloClient->post('path', ['key' => 'value'])
+            $this->trelloClient->post('path', [
+                'key' => 'value',
+            ])
         );
     }
 
@@ -183,7 +189,9 @@ class TrelloClientTest extends TestCase
 
         static::assertEquals(
             $contents,
-            $this->trelloClient->patch('path', ['key' => 'value'])
+            $this->trelloClient->patch('path', [
+                'key' => 'value',
+            ])
         );
     }
 
@@ -214,7 +222,9 @@ class TrelloClientTest extends TestCase
 
         static::assertEquals(
             $contents,
-            $this->trelloClient->put('path', ['key' => 'value'])
+            $this->trelloClient->put('path', [
+                'key' => 'value',
+            ])
         );
     }
 
@@ -245,7 +255,9 @@ class TrelloClientTest extends TestCase
 
         static::assertEquals(
             $contents,
-            $this->trelloClient->delete('path', ['key' => 'value'])
+            $this->trelloClient->delete('path', [
+                'key' => 'value',
+            ])
         );
     }
 }

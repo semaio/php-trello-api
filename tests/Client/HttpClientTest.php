@@ -145,7 +145,9 @@ class HttpClientTest extends TestCase
     {
         $httpMethod = 'POST';
         $uri = 'api/3/contacts';
-        $headers = ['header' => 'content'];
+        $headers = [
+            'header' => 'content',
+        ];
 
         /** @var MockObject|RequestInterface $request */
         $request = $this->createMock(RequestInterface::class);

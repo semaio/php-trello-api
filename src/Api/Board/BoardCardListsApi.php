@@ -52,6 +52,8 @@ class BoardCardListsApi extends AbstractApi
      * Create a list on a given board.
      *
      * @see https://trello.com/docs/api/board/#post-1-boards-board-id-lists
+     *
+     * @throws \Semaio\TrelloApi\Exception\MissingArgumentException
      */
     public function create(string $id, array $params = []): array
     {

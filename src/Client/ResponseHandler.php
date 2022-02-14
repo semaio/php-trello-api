@@ -13,7 +13,7 @@ class ResponseHandler
     {
         $body = $response->getBody()->getContents();
 
-        $content = json_decode($body, true);
+        $content = json_decode($body, true, 512);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
             throw new InvalidJsonResponseException($body);

@@ -11,7 +11,7 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * Class HttpException.
  */
-class HttpException extends RuntimeException implements ExceptionInterface
+class HttpException extends RuntimeException
 {
     /**
      * @var RequestInterface

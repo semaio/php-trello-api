@@ -38,6 +38,8 @@ class WebhookApi extends AbstractApi
      * Create a webhook.
      *
      * @see https://trello.com/docs/api/webhook/#post-1-webhooks
+     *
+     * @throws \Semaio\TrelloApi\Exception\MissingArgumentException
      */
     public function create(array $params = []): array
     {
@@ -50,6 +52,8 @@ class WebhookApi extends AbstractApi
      * Update a webhook.
      *
      * @see https://trello.com/docs/api/webhook/#put-1-webhooks-idwebhook
+     *
+     * @throws \Semaio\TrelloApi\Exception\MissingArgumentException
      */
     public function update(string $id, array $params = []): array
     {
@@ -75,7 +79,9 @@ class WebhookApi extends AbstractApi
      */
     public function setCallbackUrl(string $id, string $url): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/callbackUrl', ['value' => $url]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/callbackUrl', [
+            'value' => $url,
+        ]);
     }
 
     /**
@@ -85,7 +91,9 @@ class WebhookApi extends AbstractApi
      */
     public function setDescription(string $id, string $description): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/description', ['value' => $description]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/description', [
+            'value' => $description,
+        ]);
     }
 
     /**
@@ -95,7 +103,9 @@ class WebhookApi extends AbstractApi
      */
     public function setModel(string $id, string $modelId): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/idModel', ['value' => $modelId]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/idModel', [
+            'value' => $modelId,
+        ]);
     }
 
     /**
@@ -105,6 +115,8 @@ class WebhookApi extends AbstractApi
      */
     public function setActive(string $id, bool $status): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/active', ['value' => $status]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/active', [
+            'value' => $status,
+        ]);
     }
 }

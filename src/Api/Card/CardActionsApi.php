@@ -32,7 +32,9 @@ class CardActionsApi extends AbstractApi
      */
     public function addComment(string $id, string $text): array
     {
-        return $this->post($this->getPath($id).'/comments', ['text' => $text]);
+        return $this->post($this->getPath($id).'/comments', [
+            'text' => $text,
+        ]);
     }
 
     /**

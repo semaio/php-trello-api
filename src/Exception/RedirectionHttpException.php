@@ -7,6 +7,6 @@ namespace Semaio\TrelloApi\Exception;
 /**
  * Class RedirectionHttpException.
  */
-class RedirectionHttpException extends ClientErrorHttpException implements ExceptionInterface
+class RedirectionHttpException extends ClientErrorHttpException
 {
 }

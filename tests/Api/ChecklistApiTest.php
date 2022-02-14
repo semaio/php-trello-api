@@ -24,7 +24,9 @@ class ChecklistApiTest extends ApiTestCase
      */
     public function shouldShowChecklist(): void
     {
-        $response = ['id' => $this->fakeChecklistId];
+        $response = [
+            'id' => $this->fakeChecklistId,
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())
@@ -61,7 +63,9 @@ class ChecklistApiTest extends ApiTestCase
     {
         $this->expectException(MissingArgumentException::class);
 
-        $data = ['idCard' => $this->fakeId('list')];
+        $data = [
+            'idCard' => $this->fakeId('list'),
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::never())->method('post');
@@ -76,7 +80,9 @@ class ChecklistApiTest extends ApiTestCase
     {
         $this->expectException(MissingArgumentException::class);
 
-        $data = ['name' => 'Test Checklist'];
+        $data = [
+            'name' => 'Test Checklist',
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::never())->method('post');
@@ -89,7 +95,9 @@ class ChecklistApiTest extends ApiTestCase
      */
     public function shouldUpdateChecklist(): void
     {
-        $response = ['name' => 'Test Checklist'];
+        $response = [
+            'name' => 'Test Checklist',
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())

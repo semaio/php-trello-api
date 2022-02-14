@@ -31,7 +31,9 @@ class MemberApiTest extends ApiTestCase
      */
     public function shouldShowMember(): void
     {
-        $response = ['id' => $this->fakeMemberId];
+        $response = [
+            'id' => $this->fakeMemberId,
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())
@@ -47,7 +49,9 @@ class MemberApiTest extends ApiTestCase
      */
     public function shouldUpdateMember(): void
     {
-        $response = ['id' => $this->fakeMemberId];
+        $response = [
+            'id' => $this->fakeMemberId,
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())
@@ -63,7 +67,9 @@ class MemberApiTest extends ApiTestCase
      */
     public function shouldGetDeltas(): void
     {
-        $response = ['id' => $this->fakeMemberId];
+        $response = [
+            'id' => $this->fakeMemberId,
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())

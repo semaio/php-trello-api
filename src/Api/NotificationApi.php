@@ -51,7 +51,9 @@ class NotificationApi extends AbstractApi
      */
     public function setUnread(string $id, bool $status): array
     {
-        return $this->put($this->getPath().'/'.rawurlencode($id).'/unread', ['value' => $status]);
+        return $this->put($this->getPath().'/'.rawurlencode($id).'/unread', [
+            'value' => $status,
+        ]);
     }
 
     /**

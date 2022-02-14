@@ -367,7 +367,7 @@ final class WebhookEvents
      */
     public const POWERUP_DISABLE = 'disablePowerUp';
 
-    public static function all()
+    public static function all(): array
     {
         return [
             self::BOARD_CREATE,

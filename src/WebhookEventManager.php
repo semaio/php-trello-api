@@ -264,6 +264,9 @@ class WebhookEventManager extends Manager implements WebhookEventManagerInterfac
         $this->dispatcher->dispatch($event, $eventName);
     }
 
+    /**
+     * Check if the webhook is from Trello.
+     */
     private function isTrelloWebhook(Request $request): bool
     {
         if ($request->getMethod() !== 'POST') {

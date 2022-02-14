@@ -653,7 +653,7 @@ class CardModel extends AbstractModel implements CardModelInterface
      */
     public function setLabels(array $labels)
     {
-        $this->data['labels'] = $labels;
+        $this->data['idLabels'] = $labels;
 
         return $this;
     }
@@ -663,7 +663,7 @@ class CardModel extends AbstractModel implements CardModelInterface
      */
     public function getLabels()
     {
-        return $this->data['labels'];
+        return $this->data['idLabels'];
     }
 
     /**
@@ -673,7 +673,7 @@ class CardModel extends AbstractModel implements CardModelInterface
     {
         return array_map(function ($label) {
             return $label['color'];
-        }, $this->data['labels']);
+        }, $this->data['idLabels']);
     }
 
     /**
@@ -693,7 +693,9 @@ class CardModel extends AbstractModel implements CardModelInterface
             throw new InvalidArgumentException(sprintf('Card %s already has the %s label.', $this->getName(), $color));
         }
 
-        $this->data['labels'][] = ['color' => $color];
+        $this->data['idLabels'][] = [
+            'color' => $color,
+        ];
 
         return $this;
     }
@@ -707,9 +709,9 @@ class CardModel extends AbstractModel implements CardModelInterface
             throw new InvalidArgumentException(sprintf("Can't remove the %s label because card %s doesn't have it.", $color, $this->getName()));
         }
 
-        foreach ($this->data['labels'] as $key => $label) {
+        foreach ($this->data['idLabels'] as $key => $label) {
             if ($label['color'] === $color) {
-                unset($this->data['labels'][$key]);
+                unset($this->data['idLabels'][$key]);
             }
         }
 

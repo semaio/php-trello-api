@@ -28,7 +28,9 @@ class CardApiTest extends ApiTestCase
      */
     public function shouldShowCard(): void
     {
-        $response = ['id' => $this->fakeCardId];
+        $response = [
+            'id' => $this->fakeCardId,
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())
@@ -100,7 +102,9 @@ class CardApiTest extends ApiTestCase
      */
     public function shouldUpdateCard(): void
     {
-        $response = ['name' => 'Test Card'];
+        $response = [
+            'name' => 'Test Card',
+        ];
 
         $api = $this->getApiMock();
         $api->expects(static::once())
