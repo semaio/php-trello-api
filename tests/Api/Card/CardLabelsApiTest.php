@@ -13,7 +13,7 @@ use Semaio\TrelloApi\Tests\Api\ApiTestCase;
  */
 class CardLabelsApiTest extends ApiTestCase
 {
-    protected $apiPath = 'cards/#id#/labels';
+    protected $apiPath = 'cards/#id#/idLabels';
 
     /**
      * @test
@@ -34,21 +34,6 @@ class CardLabelsApiTest extends ApiTestCase
     /**
      * @test
      */
-    public function shouldNotSetUnexistingLabels(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-
-        $labels = ['unexisting', 'purple'];
-
-        $api = $this->getApiMock();
-        $api->expects(static::never())->method('put');
-
-        $api->set($this->fakeParentId, $labels);
-    }
-
-    /**
-     * @test
-     */
     public function shouldRemoveALabel(): void
     {
         $response = ['response'];
@@ -62,21 +47,6 @@ class CardLabelsApiTest extends ApiTestCase
             ->willReturn($response);
 
         static::assertEquals($response, $api->remove($this->fakeParentId, $label));
-    }
-
-    /**
-     * @test
-     */
-    public function shouldNotRemoveUnexistingLabel(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-
-        $label = 'unexisting';
-
-        $api = $this->getApiMock();
-        $api->expects(static::never())->method('put');
-
-        $api->remove($this->fakeParentId, $label);
     }
 
     protected function getApiClass()
