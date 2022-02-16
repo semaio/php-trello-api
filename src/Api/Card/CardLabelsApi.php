@@ -23,13 +23,7 @@ class CardLabelsApi extends AbstractApi
      */
     public function set(string $id, array $labels): array
     {
-        foreach ($labels as $label) {
-            if (!in_array($label, ['all', 'green', 'yellow', 'orange', 'red', 'purple', 'blue'], true)) {
-                throw new InvalidArgumentException(sprintf('Label "%s" does not exist.', $label));
-            }
-        }
-
-        return $this->put($this->getPath($id), [
+        return $this->put($this->getPath($id, 'cards/#id#/idLabels'), [
             'value' => implode(',', $labels),
         ]);
     }
@@ -41,10 +35,6 @@ class CardLabelsApi extends AbstractApi
      */
     public function remove(string $id, string $label): array
     {
-        if (!in_array($label, ['green', 'yellow', 'orange', 'red', 'purple', 'blue'], true)) {
-            throw new InvalidArgumentException(sprintf('Label "%s" does not exist.', $label));
-        }
-
-        return $this->delete($this->getPath($id).'/'.rawurlencode($label));
+        return $this->delete($this->getPath($id, 'cards/#id#/idLabels').'/'.rawurlencode($label));
     }
 }

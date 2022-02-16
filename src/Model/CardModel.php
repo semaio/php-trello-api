@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Model;
 
+use DateTime;
 use Semaio\TrelloApi\Exception\InvalidArgumentException;
 use Semaio\TrelloApi\Exception\RuntimeException;
 use Semaio\TrelloApi\WebhookEvents;
@@ -131,7 +132,7 @@ class CardModel extends AbstractModel implements CardModelInterface
     /**
      * {@inheritdoc}
      */
-    public function setDueDate(?\DateTime $due = null)
+    public function setDueDate(?DateTime $due = null)
     {
         $this->data['due'] = $due;
 
@@ -143,11 +144,11 @@ class CardModel extends AbstractModel implements CardModelInterface
      */
     public function getDueDate()
     {
-        if ($this->data['due'] instanceof \DateTime) {
+        if ($this->data['due'] instanceof DateTime) {
             return $this->data['due'];
         }
 
-        return new \DateTime($this->data['due']);
+        return new DateTime($this->data['due']);
     }
 
     /**
@@ -346,9 +347,7 @@ class CardModel extends AbstractModel implements CardModelInterface
             $checklists[] = new ChecklistModel($this->client, $this->client->getChecklistApi(), $id);
         }
 
-        $checklists = array_merge($checklists, $this->newChecklists);
-
-        return $checklists;
+        return array_merge($checklists, $this->newChecklists);
     }
 
     /**
@@ -741,7 +740,7 @@ class CardModel extends AbstractModel implements CardModelInterface
      */
     public function getDateOfLastActivity()
     {
-        return new \DateTime($this->data['dateLastActivity']);
+        return new DateTime($this->data['dateLastActivity']);
     }
 
     /**
