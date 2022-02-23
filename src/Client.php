@@ -9,6 +9,7 @@ use Semaio\TrelloApi\Api\BoardApi;
 use Semaio\TrelloApi\Api\CardApi;
 use Semaio\TrelloApi\Api\CardListApi;
 use Semaio\TrelloApi\Api\ChecklistApi;
+use Semaio\TrelloApi\Api\LabelApi;
 use Semaio\TrelloApi\Api\MemberApi;
 use Semaio\TrelloApi\Api\NotificationApi;
 use Semaio\TrelloApi\Api\OrganizationApi;
@@ -79,6 +80,14 @@ class Client implements ClientInterface
     public function getChecklistApi(): ChecklistApi
     {
         return new ChecklistApi($this->trelloClient);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLabelApi(): LabelApi
+    {
+        return new LabelApi($this->trelloClient);
     }
 
     /**

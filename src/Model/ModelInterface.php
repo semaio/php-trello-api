@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Semaio\TrelloApi\Model;
 
 use Semaio\TrelloApi\Exception\BadMethodCallException;
+use Semaio\TrelloApi\Exception\PermissionDeniedException;
 
 interface ModelInterface
 {
