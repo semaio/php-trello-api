@@ -9,6 +9,7 @@ use Semaio\TrelloApi\Api\BoardApi;
 use Semaio\TrelloApi\Api\CardApi;
 use Semaio\TrelloApi\Api\CardListApi;
 use Semaio\TrelloApi\Api\ChecklistApi;
+use Semaio\TrelloApi\Api\LabelApi;
 use Semaio\TrelloApi\Api\MemberApi;
 use Semaio\TrelloApi\Api\NotificationApi;
 use Semaio\TrelloApi\Api\OrganizationApi;
@@ -47,6 +48,11 @@ interface ClientInterface
      * Get the Trello API Checklist.
      */
     public function getChecklistApi(): ChecklistApi;
+
+    /**
+     * Get the Trello API Label.
+     */
+    public function getLabelApi(): LabelApi;
 
     /**
      * Get the Trello API Member.

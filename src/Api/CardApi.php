@@ -59,7 +59,7 @@ class CardApi extends AbstractApi
     /**
      * Find a card by id.
      *
-     * @see https://trello.com/docs/api/card/#get-1-cards-card-id-or-shortlink
+     * @see https://developer.atlassian.com/cloud/trello/rest/api-group-cards/#api-cards-id-get
      */
     public function show(string $id, array $params = []): array
     {
@@ -69,7 +69,7 @@ class CardApi extends AbstractApi
     /**
      * Create a card.
      *
-     * @see https://trello.com/docs/api/card/#post-1-cards
+     * @see https://developer.atlassian.com/cloud/trello/rest/api-group-cards/#api-cards-post
      *
      * @throws \Semaio\TrelloApi\Exception\MissingArgumentException
      */
@@ -90,11 +90,21 @@ class CardApi extends AbstractApi
     /**
      * Update a card.
      *
-     * @see https://trello.com/docs/api/card/#put-1-cards
+     * @see https://developer.atlassian.com/cloud/trello/rest/api-group-cards/#api-cards-id-put
      */
     public function update(string $id, array $params = []): array
     {
         return $this->put($this->getPath().'/'.rawurlencode($id), $params);
+    }
+
+    /**
+     * Remove a card.
+     *
+     * @see https://developer.atlassian.com/cloud/trello/rest/api-group-cards/#api-cards-id-delete
+     */
+    public function remove(string $id): array
+    {
+        return $this->delete($this->getPath().'/'.rawurlencode($id));
     }
 
     /**
@@ -112,7 +122,7 @@ class CardApi extends AbstractApi
     /**
      * Get a given card's board.
      *
-     * @see https://trello.com/docs/api/card/#put-1-cards-card-id-or-shortlink-idboard
+     * @see https://developer.atlassian.com/cloud/trello/rest/api-group-cards/#api-cards-id-board-get
      */
     public function getBoard(string $id, array $params = []): array
     {
