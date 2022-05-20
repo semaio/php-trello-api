@@ -1,60 +1,60 @@
 {
-  "name": "semaio/php-trello-api",
-  "type": "library",
-  "description": "PHP client for Trello API v1",
-  "keywords": [
-    "trello"
-  ],
-  "license": "MIT",
-  "require": {
-    "php": "^7.3 | ^8.0",
-    "php-http/discovery": "^1.6",
-    "psr/http-client": "^1.0",
-    "psr/http-factory": "^1.0",
-    "psr/http-message": "^1.0",
-    "psr/http-message-implementation": "^1.0"
-  },
-  "require-dev": {
-    "http-interop/http-factory-guzzle": "^1.0",
-    "php-http/guzzle6-adapter": "^2.0",
-    "phpunit/phpunit": "^9.0",
-    "symfony/event-dispatcher": "^4.4|^5.0",
-    "symfony/http-foundation": "^4.4|^5.0",
-    "symplify/easy-coding-standard": "^8.0",
-    "symplify/config-transformer": "^10.0"
-  },
-  "suggest": {
-    "symfony/event-dispatcher": "Symfony Event Dispatcher for the Trello webhook service.",
-    "symfony/http-foundation": "Symfony Http Foundation for the Trello webhook service."
-  },
-  "autoload": {
-    "psr-4": {
-      "Semaio\\TrelloApi\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Semaio\\TrelloApi\\Tests\\": "tests/"
-    }
-  },
-  "scripts": {
-    "test": [
-      "./vendor/bin/phpunit --no-coverage"
+    "name": "semaio/php-trello-api",
+    "type": "library",
+    "description": "PHP client for Trello API v1",
+    "keywords": [
+        "trello"
     ],
-    "test-coverage": [
-      "mkdir -p build/logs",
-      "./vendor/bin/phpunit --coverage-clover build/logs/clover.xml"
-    ],
-    "cs-check": [
-      "./vendor/bin/ecs -c .php-cs.php check"
-    ],
-    "cs-fix": [
-      "./vendor/bin/ecs -c .php-cs.php check --fix"
-    ]
-  },
-  "config": {
-    "allow-plugins": {
-      "dealerdirect/phpcodesniffer-composer-installer": true
+    "license": "MIT",
+    "require": {
+        "php": "^7.3|^8.0",
+        "php-http/discovery": "^1.6",
+        "psr/http-client": "^1.0",
+        "psr/http-factory": "^1.0",
+        "psr/http-message": "^1.0",
+        "psr/http-message-implementation": "^1.0"
+    },
+    "require-dev": {
+        "http-interop/http-factory-guzzle": "^1.0",
+        "php-http/guzzle6-adapter": "^2.0",
+        "phpunit/phpunit": "^9.0",
+        "symfony/event-dispatcher": "^4.4|^5.0",
+        "symfony/http-foundation": "^4.4|^5.0",
+        "symplify/easy-coding-standard": "^8.0",
+        "symplify/config-transformer": "^10.0"
+    },
+    "suggest": {
+        "symfony/event-dispatcher": "Symfony Event Dispatcher for the Trello webhook service.",
+        "symfony/http-foundation": "Symfony Http Foundation for the Trello webhook service."
+    },
+    "autoload": {
+        "psr-4": {
+            "Semaio\\TrelloApi\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Semaio\\TrelloApi\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": [
+            "./vendor/bin/phpunit --no-coverage"
+        ],
+        "test-coverage": [
+            "mkdir -p build/logs",
+            "./vendor/bin/phpunit --coverage-clover build/logs/clover.xml"
+        ],
+        "cs-check": [
+            "./vendor/bin/ecs -c .php-cs.php check"
+        ],
+        "cs-fix": [
+            "./vendor/bin/ecs -c .php-cs.php check --fix"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     }
-  }
 }
