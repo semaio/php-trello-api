@@ -17,7 +17,26 @@ $ composer require semaio/php-trello-api
 
 ## Usage
 
-tbd.
+Basic example for card creation:
+
+```
+namespace MyProject;
+use Semaio\TrelloApi;
+
+require 'vendor/autoload.php';
+
+
+$client_builder = new TrelloApi\ClientBuilder();
+$client         = $client_builder->build( $trello_api_key, $trello_api_token ); // Change $trello_api_key and $trello_api_token
+$card = array(
+    'name'   => 'Card subject',
+    'desc'   => 'Card content',
+    'pos'    => '1',
+    'idList' => $list_id, // Set a list ID
+    'labels' => array( $label ),
+);
+$client->getCardApi()->create( $card );
+```
 
 ## Support
 
