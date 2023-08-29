@@ -43,7 +43,7 @@ class MemberBoardsApi extends AbstractApi
      *
      * @see https://trello.com/docs/api/member/#get-1-members-idmember-or-username-boards-filter
      */
-    public function filters(string $id, array $filters): array
+    public function filters(string $id, array $filters, array $params = []): array
     {
         $allowed = ['all', 'members', 'organization', 'public', 'open', 'closed', 'pinned', 'unpinned', 'starred'];
         $filters = $this->validateAllowedParameters($allowed, $filters, 'filter');

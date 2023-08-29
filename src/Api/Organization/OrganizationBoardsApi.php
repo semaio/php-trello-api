@@ -35,7 +35,7 @@ class OrganizationBoardsApi extends AbstractApi
      *
      * @see https://trello.com/docs/api/organization/#get-1-organizations-idorganization-or-username-boards-filter
      */
-    public function filters(string $id, array $filters): array
+    public function filters(string $id, array $filters, array $params = []): array
     {
         $allowed = ['all', 'members', 'organization', 'public', 'open', 'closed', 'starred'];
         $filters = $this->validateAllowedParameters($allowed, $filters, 'filter');
