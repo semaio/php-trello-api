@@ -30,9 +30,9 @@ class BoardCardListsApi extends AbstractApi
      *
      * @see https://trello.com/docs/api/board/#get-1-boards-board-id-lists-filter
      */
-    public function filter(string $id, string $filter = 'all'): array
+    public function filter(string $id, string $filter = 'all', array $params = []): array
     {
-        return $this->filters($id, [$filter]);
+        return $this->filters($id, [$filter], $params);
     }
 
     /**
@@ -40,12 +40,12 @@ class BoardCardListsApi extends AbstractApi
      *
      * @see https://trello.com/docs/api/board/#get-1-boards-board-id-lists-filter
      */
-    public function filters(string $id, array $filters): array
+    public function filters(string $id, array $filters, array $params = []): array
     {
         $allowed = ['all', 'none', 'open', 'closed'];
         $filters = $this->validateAllowedParameters($allowed, $filters, 'filter');
 
-        return $this->get($this->getPath($id).'/'.implode(',', $filters));
+        return $this->get($this->getPath($id).'/'.implode(',', $filters), $params);
     }
 
     /**
