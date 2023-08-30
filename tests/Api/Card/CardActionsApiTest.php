@@ -51,6 +51,24 @@ class CardActionsApiTest extends ApiTestCase
     /**
      * @test
      */
+    public function shouldUpdateComment(): void
+    {
+        $response = ['response'];
+
+        $text = 'Comment text updated';
+
+        $api = $this->getApiMock();
+        $api->expects(static::once())
+            ->method('put')
+            ->with($this->getPath().'/'.$this->fakeId.'/comments')
+            ->willReturn($response);
+
+        static::assertEquals($response, $api->updateComment($this->fakeParentId, $this->fakeId, $text));
+    }
+
+    /**
+     * @test
+     */
     public function shouldRemoveComment(): void
     {
         $response = ['response'];
