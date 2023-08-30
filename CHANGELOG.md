@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * ...
 
+## [1.3.0] - 2023-08-30
+
+### Changed
+
+* Compatibility with PHP 8.2 by [@H1X4Dev](https://github.com/H1X4Dev)
+* Support parameters while filtering by [@H1X4Dev](https://github.com/H1X4Dev)
+* Add ability to update a comment by [@H1X4Dev](https://github.com/H1X4Dev)
+
 ## [1.2.0] - 2023-04-03
 
 ### Added
