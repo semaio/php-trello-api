@@ -38,6 +38,18 @@ class CardActionsApi extends AbstractApi
     }
 
     /**
+     * Update comment on a given card.
+     *
+     * @see https://developer.atlassian.com/cloud/trello/rest/api-group-cards/#api-cards-id-actions-idaction-comments-put
+     */
+    public function updateComment(string $id, string $commentId, string $text): array
+    {
+        return $this->put($this->getPath($id).'/'.rawurlencode($commentId).'/comments', [
+            'text' => $text,
+        ]);
+    }
+
+    /**
      * Remove comment to a given card.
      *
      * @see https://trello.com/docs/api/card/#delete-1-cards-card-id-or-shortlink-actions-idaction-comments

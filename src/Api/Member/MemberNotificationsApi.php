@@ -31,9 +31,9 @@ class MemberNotificationsApi extends AbstractApi
      *
      * @see https://trello.com/docs/api/member/#get-1-members-idmember-or-username-notifications-filter
      */
-    public function filter(string $id, string $filter = 'all'): array
+    public function filter(string $id, string $filter = 'all', array $params = []): array
     {
-        return $this->filters($id, [$filter]);
+        return $this->filters($id, [$filter], $params);
     }
 
     /**
@@ -41,13 +41,13 @@ class MemberNotificationsApi extends AbstractApi
      *
      * @see https://trello.com/docs/api/member/#get-1-members-idmember-or-username-notifications-filter
      */
-    public function filters(string $id, array $filters): array
+    public function filters(string $id, array $filters, array $params = []): array
     {
         $events = WebhookEvents::all();
         $events[] = 'all';
 
         $filters = $this->validateAllowedParameters($events, $filters, 'event');
 
-        return $this->get($this->getPath($id).'/'.implode(',', $filters));
+        return $this->get($this->getPath($id).'/'.implode(',', $filters), $params);
     }
 }
