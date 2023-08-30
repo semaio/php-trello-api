@@ -17,9 +17,9 @@
     "require-dev": {
         "http-interop/http-factory-guzzle": "^1.0",
         "php-http/guzzle6-adapter": "^2.0",
-        "phpunit/phpunit": "^9.0",
-        "symfony/event-dispatcher": "^4.4|^5.0",
-        "symfony/http-foundation": "^4.4|^5.0",
+        "phpunit/phpunit": "^9.0|^10.0",
+        "symfony/event-dispatcher": "^4.4|^5.0|^6.0",
+        "symfony/http-foundation": "^4.4|^5.0|^6.0",
         "symplify/easy-coding-standard": "^8.0",
         "symplify/config-transformer": "^10.0"
     },
