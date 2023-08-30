@@ -89,7 +89,7 @@ class LabelApi extends AbstractApi
             throw new InvalidArgumentException(sprintf('The "field" parameter must be one of "%s".', implode(', ', ['name', 'color'])));
         }
 
-        if ('color' === $field) {
+        if ($field === 'color') {
             $colors = ['black', 'blue', 'green', 'lime', 'orange', 'pink', 'purple', 'red', 'sky', 'yellow'];
             if (!in_array($value, $colors, true)) {
                 throw new InvalidArgumentException(sprintf('The "color" parameter must be one of "%s".', implode(', ', $colors)));

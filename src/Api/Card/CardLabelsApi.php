@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Semaio\TrelloApi\Api\Card;
 
 use Semaio\TrelloApi\Api\AbstractApi;
-use Semaio\TrelloApi\Exception\InvalidArgumentException;
 
 /**
  * @see https://trello.com/docs/api/card

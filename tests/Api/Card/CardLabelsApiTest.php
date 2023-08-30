@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Semaio\TrelloApi\Tests\Api\Card;
 
 use Semaio\TrelloApi\Api\Card\CardLabelsApi;
-use Semaio\TrelloApi\Exception\InvalidArgumentException;
 use Semaio\TrelloApi\Tests\Api\ApiTestCase;
 
 /**

@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests\Api;
 
-use Semaio\TrelloApi\Api\Label\LabelCardsApi;
-use Semaio\TrelloApi\Api\Label\LabelItemsApi;
 use Semaio\TrelloApi\Api\LabelApi;
-use Semaio\TrelloApi\Exception\InvalidArgumentException;
 use Semaio\TrelloApi\Exception\MissingArgumentException;
 
 /**
