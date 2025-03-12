@@ -16,13 +16,13 @@ class LabelApi extends AbstractApi
     /**
      * @see https://developer.atlassian.com/cloud/trello/rest/api-group-labels/#api-group-labels
      */
-    public static $fields = [
+    public static array $fields = [
         'idBoard',
         'name',
         'color',
     ];
 
-    protected $path = 'labels';
+    protected string $path = 'labels';
 
     /**
      * Find a label by id.

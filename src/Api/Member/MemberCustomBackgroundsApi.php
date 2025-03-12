@@ -18,5 +18,5 @@ use Semaio\TrelloApi\Api\AbstractApi;
  */
 class MemberCustomBackgroundsApi extends AbstractApi
 {
-    protected $path = 'members/#id#/customBackgrounds';
+    protected string $path = 'members/#id#/customBackgrounds';
 }

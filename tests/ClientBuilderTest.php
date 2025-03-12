@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface as HttpClientInterface;
@@ -21,23 +23,26 @@ class ClientBuilderTest extends TestCase
     /**
      * @var HttpClientInterface|MockObject
      */
-    protected $httpClient;
+    protected HttpClientInterface|MockObject $httpClient;
 
     /**
      * @var RequestFactoryInterface|MockObject
      */
-    protected $requestFactory;
+    protected MockObject|RequestFactoryInterface $requestFactory;
 
     /**
      * @var StreamFactoryInterface|MockObject
      */
-    protected $streamFactory;
+    protected MockObject|StreamFactoryInterface $streamFactory;
 
     /**
      * @var ClientBuilder
      */
-    protected $clientBuilder;
+    protected ClientBuilder $clientBuilder;
 
+    /**
+     * @throws Exception
+     */
     protected function setUp(): void
     {
         $this->httpClient = $this->createMock(HttpClientInterface::class);
@@ -47,60 +52,46 @@ class ClientBuilderTest extends TestCase
         $this->clientBuilder = new ClientBuilder();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_http_client_from_discovery(): void
     {
         static::assertNotSame($this->httpClient, $this->clientBuilder->getHttpClient());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_http_client(): void
     {
         $this->clientBuilder->setHttpClient($this->httpClient);
         static::assertSame($this->httpClient, $this->clientBuilder->getHttpClient());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_request_factory_from_discovery(): void
     {
         static::assertNotSame($this->requestFactory, $this->clientBuilder->getRequestFactory());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_request_factory(): void
     {
         $this->clientBuilder->setRequestFactory($this->requestFactory);
         static::assertSame($this->requestFactory, $this->clientBuilder->getRequestFactory());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_stream_factory_from_discovery(): void
     {
         static::assertNotSame($this->streamFactory, $this->clientBuilder->getStreamFactory());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_stream_factory(): void
     {
         $this->clientBuilder->setStreamFactory($this->streamFactory);
         static::assertSame($this->streamFactory, $this->clientBuilder->getStreamFactory());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_client(): void
     {
         $client = $this->clientBuilder->build('KEY', 'TOKEN');

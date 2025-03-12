@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests\Api;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Semaio\TrelloApi\Api\Member\Board\MemberBoardBackgroundsApi;
 use Semaio\TrelloApi\Api\Member\Board\MemberBoardStarsApi;
 use Semaio\TrelloApi\Api\Member\MemberActionsApi;
@@ -17,18 +19,14 @@ use Semaio\TrelloApi\Api\Member\MemberOrganizationsApi;
 use Semaio\TrelloApi\Api\Member\MemberSavedSearchesApi;
 use Semaio\TrelloApi\Api\MemberApi;
 
-/**
- * @group unit
- */
+#[Group('unit')]
 class MemberApiTest extends ApiTestCase
 {
-    protected $fakeMemberId = '5461efc60872da1eca5bf45c';
+    protected string $fakeMemberId = '5461efc60872da1eca5bf45c';
 
-    protected $apiPath = 'members';
+    protected string $apiPath = 'members';
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldShowMember(): void
     {
         $response = [
@@ -36,7 +34,7 @@ class MemberApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->apiPath.'/'.$this->fakeMemberId)
             ->willReturn($response);
@@ -44,9 +42,7 @@ class MemberApiTest extends ApiTestCase
         static::assertEquals($response, $api->show($this->fakeMemberId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldUpdateMember(): void
     {
         $response = [
@@ -54,7 +50,7 @@ class MemberApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with($this->apiPath.'/'.$this->fakeMemberId)
             ->willReturn($response);
@@ -62,9 +58,7 @@ class MemberApiTest extends ApiTestCase
         static::assertEquals($response, $api->update($this->fakeMemberId, $response));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetDeltas(): void
     {
         $response = [
@@ -72,7 +66,7 @@ class MemberApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->apiPath.'/'.$this->fakeMemberId.'/deltas')
             ->willReturn($response);
@@ -80,9 +74,7 @@ class MemberApiTest extends ApiTestCase
         static::assertEquals($response, $api->getDeltas($this->fakeMemberId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldSetUsername(): void
     {
         $response = ['response'];
@@ -90,7 +82,7 @@ class MemberApiTest extends ApiTestCase
         $username = 'TestUser';
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with($this->apiPath.'/'.$this->fakeMemberId.'/username')
             ->willReturn($response);
@@ -98,9 +90,7 @@ class MemberApiTest extends ApiTestCase
         static::assertEquals($response, $api->setUsername($this->fakeMemberId, $username));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldSetBio(): void
     {
         $response = ['response'];
@@ -108,7 +98,7 @@ class MemberApiTest extends ApiTestCase
         $bio = 'bio';
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with($this->apiPath.'/'.$this->fakeMemberId.'/bio')
             ->willReturn($response);
@@ -116,9 +106,7 @@ class MemberApiTest extends ApiTestCase
         static::assertEquals($response, $api->setBio($this->fakeMemberId, $bio));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldSetAvatar(): void
     {
         $response = ['response'];
@@ -126,7 +114,7 @@ class MemberApiTest extends ApiTestCase
         $avatar = 'avatar';
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('post')
             ->with($this->apiPath.'/'.$this->fakeMemberId.'/avatar')
             ->willReturn($response);
@@ -134,9 +122,7 @@ class MemberApiTest extends ApiTestCase
         static::assertEquals($response, $api->setAvatar($this->fakeMemberId, $avatar));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldSetAvatarSource(): void
     {
         $response = ['response'];
@@ -144,7 +130,7 @@ class MemberApiTest extends ApiTestCase
         $avatarSource = 'avatarSource';
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with($this->apiPath.'/'.$this->fakeMemberId.'/avatarSource')
             ->willReturn($response);
@@ -152,9 +138,7 @@ class MemberApiTest extends ApiTestCase
         static::assertEquals($response, $api->setAvatarSource($this->fakeMemberId, $avatarSource));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldSetInitials(): void
     {
         $response = ['response'];
@@ -162,7 +146,7 @@ class MemberApiTest extends ApiTestCase
         $initials = 'AA';
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with($this->apiPath.'/'.$this->fakeMemberId.'/initials')
             ->willReturn($response);
@@ -170,9 +154,7 @@ class MemberApiTest extends ApiTestCase
         static::assertEquals($response, $api->setInitials($this->fakeMemberId, $initials));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldSetFullName(): void
     {
         $response = ['response'];
@@ -180,7 +162,7 @@ class MemberApiTest extends ApiTestCase
         $fullName = 'John Doe';
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with($this->apiPath.'/'.$this->fakeMemberId.'/fullName')
             ->willReturn($response);
@@ -188,95 +170,73 @@ class MemberApiTest extends ApiTestCase
         static::assertEquals($response, $api->setFullName($this->fakeMemberId, $fullName));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetActionsApiObject(): void
     {
         static::assertInstanceOf(MemberActionsApi::class, $this->getApiMock()->actions());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetBoardsApiObject(): void
     {
         static::assertInstanceOf(MemberBoardsApi::class, $this->getApiMock()->boards());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetCardsApiObject(): void
     {
         static::assertInstanceOf(MemberCardsApi::class, $this->getApiMock()->cards());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetCustomBackgroundsApiObject(): void
     {
         static::assertInstanceOf(MemberCustomBackgroundsApi::class, $this->getApiMock()->customBackgrounds());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetCustomEmojiApiObject(): void
     {
         static::assertInstanceOf(MemberCustomEmojiApi::class, $this->getApiMock()->customEmoji());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetCustomStickersApiObject(): void
     {
         static::assertInstanceOf(MemberCustomStickersApi::class, $this->getApiMock()->customStickers());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetNotificationsApiObject(): void
     {
         static::assertInstanceOf(MemberNotificationsApi::class, $this->getApiMock()->notifications());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetOrganizationsApiObject(): void
     {
         static::assertInstanceOf(MemberOrganizationsApi::class, $this->getApiMock()->organizations());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetSavedSearchesApiObject(): void
     {
         static::assertInstanceOf(MemberSavedSearchesApi::class, $this->getApiMock()->savedSearches());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetBoardBackgroundsApiObject(): void
     {
         static::assertInstanceOf(MemberBoardBackgroundsApi::class, $this->getApiMock()->boards()->backgrounds());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetBoardStarsApiObject(): void
     {
         static::assertInstanceOf(MemberBoardStarsApi::class, $this->getApiMock()->boards()->stars());
     }
 
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return MemberApi::class;
     }

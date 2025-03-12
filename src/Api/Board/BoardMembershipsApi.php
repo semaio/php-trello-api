@@ -21,5 +21,5 @@ class BoardMembershipsApi extends AbstractApi
      *
      * @var string
      */
-    protected $path = 'boards/#id#/memberships';
+    protected string $path = 'boards/#id#/memberships';
 }

@@ -4,26 +4,24 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests\Api\Card;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Semaio\TrelloApi\Api\Card\CardMembersApi;
 use Semaio\TrelloApi\Exception\InvalidArgumentException;
 use Semaio\TrelloApi\Tests\Api\ApiTestCase;
 
-/**
- * @group unit
- */
+#[Group('unit')]
 class CardMembersApiTest extends ApiTestCase
 {
-    protected $apiPath = 'cards/#id#/members';
+    protected string $apiPath = 'cards/#id#/members';
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetAllMembers(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath())
             ->willReturn($response);
@@ -31,9 +29,7 @@ class CardMembersApiTest extends ApiTestCase
         static::assertEquals($response, $api->all($this->fakeParentId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldSetMembers(): void
     {
         $data = [
@@ -43,7 +39,7 @@ class CardMembersApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with($this->getPath())
             ->willReturn($data);
@@ -51,9 +47,7 @@ class CardMembersApiTest extends ApiTestCase
         static::assertEquals($data, $api->set($this->fakeParentId, $data));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldNotSetMembersWithEmptyArray(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -61,20 +55,18 @@ class CardMembersApiTest extends ApiTestCase
         $data = [];
 
         $api = $this->getApiMock();
-        $api->expects(static::never())->method('put');
+        $api->expects($this->never())->method('put');
 
         $api->set($this->fakeParentId, $data);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldAddMember(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('post')
             ->with($this->getPath())
             ->willReturn($response);
@@ -82,15 +74,13 @@ class CardMembersApiTest extends ApiTestCase
         static::assertEquals($response, $api->add($this->fakeParentId, $this->fakeId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldRemoveMember(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('delete')
             ->with($this->getPath().'/'.$this->fakeId)
             ->willReturn($response);
@@ -98,15 +88,13 @@ class CardMembersApiTest extends ApiTestCase
         static::assertEquals($response, $api->remove($this->fakeParentId, $this->fakeId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldAddVote(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('post')
             ->with($this->getPath().'/membersVoted')
             ->willReturn($response);
@@ -114,15 +102,13 @@ class CardMembersApiTest extends ApiTestCase
         static::assertEquals($response, $api->addVote($this->fakeParentId, $this->fakeId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldRemoveVote(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('delete')
             ->with($this->getPath().'/membersVoted/'.$this->fakeId)
             ->willReturn($response);
@@ -130,7 +116,7 @@ class CardMembersApiTest extends ApiTestCase
         static::assertEquals($response, $api->removeVote($this->fakeParentId, $this->fakeId));
     }
 
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return CardMembersApi::class;
     }

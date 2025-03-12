@@ -9,17 +9,17 @@ jobs:
         strategy:
             fail-fast: true
             matrix:
-                php: [7.3, 7.4, 8.0, 8.1, 8.2]
-                dependency-version: [prefer-lowest, prefer-stable]
+                php: [8.2,8.3,8.4]
+                dependency-version: [prefer-stable]
 
         name: P${{ matrix.php }} - ${{ matrix.dependency-version }}
 
         steps:
             -   name: Checkout code
-                uses: actions/checkout@v1
+                uses: actions/checkout@v4
 
             -   name: Cache dependencies
-                uses: actions/cache@v1
+                uses: actions/cache@v4
                 with:
                     path: ~/.composer/cache/files
                     key: dependencies--php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
@@ -29,11 +29,18 @@ jobs:
                 with:
                     php-version: ${{ matrix.php }}
                     extensions: curl, mbstring, iconv
-                    coverage: none
+                    coverage: xdebug, pcov
+                    tools: composer:v2
 
             -   name: Install dependencies
                 run: |
                     composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
 
             -   name: Execute tests
-                run: vendor/bin/phpunit
+                run: vendor/bin/phpunit --coverage-clover clover.xml
+
+            -   name: Coverage Check
+                uses: ericsizemore/phpunit-coverage-check-action@1.0.0
+                with:
+                    clover_file: 'clover.xml'
+                    threshold: 75

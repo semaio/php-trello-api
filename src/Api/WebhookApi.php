@@ -15,14 +15,14 @@ class WebhookApi extends AbstractApi
     /**
      * @see https://trello.com/docs/api/webhook/#get-1-webhooks-idwebhook-field
      */
-    public static $fields = [
+    public static array $fields = [
         'description',
         'idModel',
         'callbackURL',
         'active',
     ];
 
-    protected $path = 'webhooks';
+    protected string $path = 'webhooks';
 
     /**
      * Find a webhook by id.

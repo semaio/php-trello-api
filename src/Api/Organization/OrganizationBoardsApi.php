@@ -8,7 +8,7 @@ use Semaio\TrelloApi\Api\AbstractApi;
 
 class OrganizationBoardsApi extends AbstractApi
 {
-    protected $path = 'organization/#id#/boards';
+    protected string $path = 'organization/#id#/boards';
 
     /**
      * Get boards related to a given organization.

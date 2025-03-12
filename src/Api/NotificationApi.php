@@ -16,7 +16,7 @@ class NotificationApi extends AbstractApi
      *
      * @see https://trello.com/docs/api/notification/#get-1-notifications-idnotification-field
      */
-    public static $fields = [
+    public static array $fields = [
         'unread',
         'type',
         'date',
@@ -24,7 +24,7 @@ class NotificationApi extends AbstractApi
         'idMemberCreator',
     ];
 
-    protected $path = 'notifications';
+    protected string $path = 'notifications';
 
     /**
      * @see https://trello.com/docs/api/notification/#get-1-notifications-idnotification

@@ -16,7 +16,7 @@ use Semaio\TrelloApi\Api\Member\Board\MemberBoardStarsApi;
  */
 class MemberBoardsApi extends AbstractApi
 {
-    protected $path = 'members/#id#/boards';
+    protected string $path = 'members/#id#/boards';
 
     /**
      * Get boads related to a given member.

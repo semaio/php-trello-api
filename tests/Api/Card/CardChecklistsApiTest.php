@@ -4,26 +4,24 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests\Api\Card;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Semaio\TrelloApi\Api\Card\CardChecklistsApi;
 use Semaio\TrelloApi\Exception\MissingArgumentException;
 use Semaio\TrelloApi\Tests\Api\ApiTestCase;
 
-/**
- * @group unit
- */
+#[Group('unit')]
 class CardChecklistsApiTest extends ApiTestCase
 {
-    protected $apiPath = 'cards/#id#/checklists';
+    protected string $apiPath = 'cards/#id#/checklists';
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetAllChecklists(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with('cards/'.$this->fakeParentId.'/checklists')
             ->willReturn($response);
@@ -31,9 +29,7 @@ class CardChecklistsApiTest extends ApiTestCase
         static::assertEquals($response, $api->all($this->fakeParentId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldCreateChecklist(): void
     {
         $data = [
@@ -41,7 +37,7 @@ class CardChecklistsApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('post')
             ->with($this->getPath())
             ->willReturn($data);
@@ -49,9 +45,7 @@ class CardChecklistsApiTest extends ApiTestCase
         static::assertEquals($data, $api->create($this->fakeParentId, $data));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldNotCreateChecklistWithoutNameSourceChecklistIdOrValue(): void
     {
         $this->expectException(MissingArgumentException::class);
@@ -59,20 +53,18 @@ class CardChecklistsApiTest extends ApiTestCase
         $data = [];
 
         $api = $this->getApiMock();
-        $api->expects(static::never())->method('post');
+        $api->expects($this->never())->method('post');
 
         $api->create($this->fakeParentId, $data);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldRemoveChecklist(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('delete')
             ->with($this->getPath().'/'.$this->fakeId)
             ->willReturn($response);
@@ -80,15 +72,13 @@ class CardChecklistsApiTest extends ApiTestCase
         static::assertEquals($response, $api->remove($this->fakeParentId, $this->fakeId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetItemStates(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with('cards/'.$this->fakeParentId.'/checkItemStates')
             ->willReturn($response);
@@ -96,9 +86,7 @@ class CardChecklistsApiTest extends ApiTestCase
         static::assertEquals($response, $api->itemStates($this->fakeParentId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldUpdateItem(): void
     {
         $item = [
@@ -107,7 +95,7 @@ class CardChecklistsApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with($this->getPath().'/'.$this->fakeId('checklist').'/checkItem/'.$this->fakeId)
             ->willReturn($item);
@@ -115,9 +103,7 @@ class CardChecklistsApiTest extends ApiTestCase
         static::assertEquals($item, $api->updateItem($this->fakeParentId, $this->fakeId('checklist'), $this->fakeId, $item));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldCreateItem(): void
     {
         $item = [
@@ -126,7 +112,7 @@ class CardChecklistsApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('post')
             ->with($this->getPath().'/'.$this->fakeId('checklist').'/checkItem')
             ->willReturn($item);
@@ -134,15 +120,13 @@ class CardChecklistsApiTest extends ApiTestCase
         static::assertEquals($item, $api->createItem($this->fakeParentId, $this->fakeId('checklist'), 'Test', $item));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldRemoveItem(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('delete')
             ->with($this->getPath().'/'.$this->fakeId('checklist').'/checkItem/'.$this->fakeId)
             ->willReturn($response);
@@ -150,15 +134,13 @@ class CardChecklistsApiTest extends ApiTestCase
         static::assertEquals($response, $api->removeItem($this->fakeParentId, $this->fakeId('checklist'), $this->fakeId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldConvertItemToCard(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('post')
             ->with($this->getPath().'/'.$this->fakeId('checklist').'/checkItem/'.$this->fakeId.'/convertToCard')
             ->willReturn($response);
@@ -166,7 +148,7 @@ class CardChecklistsApiTest extends ApiTestCase
         static::assertEquals($response, $api->convertItemToCard($this->fakeParentId, $this->fakeId('checklist'), $this->fakeId));
     }
 
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return CardChecklistsApi::class;
     }

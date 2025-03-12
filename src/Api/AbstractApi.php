@@ -15,25 +15,17 @@ abstract class AbstractApi implements ApiInterface
     /**
      * @var array
      */
-    public static $fields;
-
-    /**
-     * The client.
-     *
-     * @var TrelloClientInterface
-     */
-    protected $client;
+    public static array $fields;
 
     /**
      * API sub namespace.
      *
      * @var string
      */
-    protected $path;
+    protected string $path;
 
-    public function __construct(TrelloClientInterface $client)
+    public function __construct(protected TrelloClientInterface $client)
     {
-        $this->client = $client;
     }
 
     /**

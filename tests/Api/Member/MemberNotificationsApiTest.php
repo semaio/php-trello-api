@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests\Api\Member;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Semaio\TrelloApi\Api\Member\MemberNotificationsApi;
 use Semaio\TrelloApi\Tests\Api\ApiTestCase;
 
-/**
- * @group unit
- */
+#[Group('unit')]
 class MemberNotificationsApiTest extends ApiTestCase
 {
-    protected $apiPath = 'members/#id#/notifications';
+    protected string $apiPath = 'members/#id#/notifications';
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetAllNotifications(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath())
             ->willReturn($response);
@@ -30,9 +28,7 @@ class MemberNotificationsApiTest extends ApiTestCase
         static::assertEquals($response, $api->all($this->fakeParentId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldFilterNotificationsWithDefaultFilter(): void
     {
         $response = ['response'];
@@ -40,7 +36,7 @@ class MemberNotificationsApiTest extends ApiTestCase
         $defaultFilter = 'all';
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath().'/'.$defaultFilter)
             ->willReturn($response);
@@ -48,9 +44,7 @@ class MemberNotificationsApiTest extends ApiTestCase
         static::assertEquals($response, $api->filter($this->fakeParentId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldFilterNotificationsWithStringArgument(): void
     {
         $response = ['response'];
@@ -58,7 +52,7 @@ class MemberNotificationsApiTest extends ApiTestCase
         $filter = 'createCard';
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath().'/createCard')
             ->willReturn($response);
@@ -66,9 +60,7 @@ class MemberNotificationsApiTest extends ApiTestCase
         static::assertEquals($response, $api->filter($this->fakeParentId, $filter));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldFilterNotificationsWithArrayArgument(): void
     {
         $response = ['response'];
@@ -76,7 +68,7 @@ class MemberNotificationsApiTest extends ApiTestCase
         $filter = ['createCard', 'updateCard'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath().'/createCard,updateCard')
             ->willReturn($response);
@@ -84,7 +76,7 @@ class MemberNotificationsApiTest extends ApiTestCase
         static::assertEquals($response, $api->filters($this->fakeParentId, $filter));
     }
 
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return MemberNotificationsApi::class;
     }

@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests\Api\Card;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Semaio\TrelloApi\Api\Card\CardLabelsApi;
 use Semaio\TrelloApi\Tests\Api\ApiTestCase;
 
-/**
- * @group unit
- */
+#[Group('unit')]
 class CardLabelsApiTest extends ApiTestCase
 {
-    protected $apiPath = 'cards/#id#/idLabels';
+    protected string $apiPath = 'cards/#id#/idLabels';
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldSetLabels(): void
     {
         $labels = ['green', 'purple'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with($this->getPath())
             ->willReturn($labels);
@@ -30,9 +28,7 @@ class CardLabelsApiTest extends ApiTestCase
         static::assertEquals($labels, $api->set($this->fakeParentId, $labels));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldRemoveALabel(): void
     {
         $response = ['response'];
@@ -40,7 +36,7 @@ class CardLabelsApiTest extends ApiTestCase
         $label = 'green';
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('delete')
             ->with($this->getPath().'/'.$label)
             ->willReturn($response);
@@ -48,7 +44,7 @@ class CardLabelsApiTest extends ApiTestCase
         static::assertEquals($response, $api->remove($this->fakeParentId, $label));
     }
 
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return CardLabelsApi::class;
     }

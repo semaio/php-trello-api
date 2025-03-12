@@ -14,31 +14,18 @@ class Configuration implements ConfigurationInterface
     /**
      * @var string
      */
-    private $baseUri = 'https://api.trello.com/%s';
-
-    /**
-     * @var string
-     */
-    private $apiKey;
-
-    /**
-     * @var string
-     */
-    private $apiToken;
+    private string $baseUri = 'https://api.trello.com/%s';
 
     /**
      * @var int
      */
-    private $apiVersion;
+    private int $apiVersion;
 
     /**
      * Configuration constructor.
      */
-    public function __construct(string $apiKey, string $apiToken, int $apiVersion = 1)
+    public function __construct(private readonly string $apiKey, private readonly string $apiToken, int $apiVersion = 1)
     {
-        $this->apiKey = $apiKey;
-        $this->apiToken = $apiToken;
-
         if (!in_array($apiVersion, static::SUPPORTED_API_VERSIONS, true)) {
             throw new InvalidApiVersionException(sprintf('Invalid api version "%s".', $apiVersion));
         }

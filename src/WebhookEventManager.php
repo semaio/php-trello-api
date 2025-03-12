@@ -30,9 +30,9 @@ use Symfony\Component\HttpFoundation\Request;
 class WebhookEventManager extends Manager implements WebhookEventManagerInterface
 {
     /**
-     * @var EventDispatcherInterface
+     * @var EventDispatcher|EventDispatcherInterface
      */
-    protected $dispatcher;
+    protected EventDispatcher|EventDispatcherInterface $dispatcher;
 
     /**
      * Constructor.

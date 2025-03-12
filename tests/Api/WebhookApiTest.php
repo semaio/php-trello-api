@@ -4,21 +4,19 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests\Api;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Semaio\TrelloApi\Api\WebhookApi;
 use Semaio\TrelloApi\Exception\MissingArgumentException;
 
-/**
- * @group unit
- */
+#[Group('unit')]
 class WebhookApiTest extends ApiTestCase
 {
-    protected $fakeId = '5461efc60872da1eca5bf45c';
+    protected string $fakeId = '5461efc60872da1eca5bf45c';
 
-    protected $apiPath = 'webhooks';
+    protected string $apiPath = 'webhooks';
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldShowWebhook(): void
     {
         $response = [
@@ -26,7 +24,7 @@ class WebhookApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->apiPath.'/'.$this->fakeId)
             ->willReturn($response);
@@ -34,15 +32,13 @@ class WebhookApiTest extends ApiTestCase
         static::assertEquals($response, $api->show($this->fakeId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldRemoveToken(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('delete')
             ->with($this->apiPath.'/'.$this->fakeId)
             ->willReturn($response);
@@ -50,9 +46,7 @@ class WebhookApiTest extends ApiTestCase
         static::assertEquals($response, $api->remove($this->fakeId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldSetDescription(): void
     {
         $response = ['response'];
@@ -60,7 +54,7 @@ class WebhookApiTest extends ApiTestCase
         $description = 'Test Webhook Description';
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with($this->apiPath.'/'.$this->fakeId.'/description')
             ->willReturn($response);
@@ -68,9 +62,7 @@ class WebhookApiTest extends ApiTestCase
         static::assertEquals($response, $api->setDescription($this->fakeId, $description));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldSetCallbackUrl(): void
     {
         $response = ['response'];
@@ -78,7 +70,7 @@ class WebhookApiTest extends ApiTestCase
         $description = 'Test Webhook CallbackUrl';
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with($this->apiPath.'/'.$this->fakeId.'/callbackUrl')
             ->willReturn($response);
@@ -86,9 +78,7 @@ class WebhookApiTest extends ApiTestCase
         static::assertEquals($response, $api->setCallbackUrl($this->fakeId, $description));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldSetModel(): void
     {
         $response = ['response'];
@@ -96,7 +86,7 @@ class WebhookApiTest extends ApiTestCase
         $modelId = $this->fakeId('webhook');
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with($this->apiPath.'/'.$this->fakeId.'/idModel')
             ->willReturn($response);
@@ -104,9 +94,7 @@ class WebhookApiTest extends ApiTestCase
         static::assertEquals($response, $api->setModel($this->fakeId, $modelId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldSetActive(): void
     {
         $response = ['response'];
@@ -114,7 +102,7 @@ class WebhookApiTest extends ApiTestCase
         $status = true;
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with($this->apiPath.'/'.$this->fakeId.'/active')
             ->willReturn($response);
@@ -122,9 +110,7 @@ class WebhookApiTest extends ApiTestCase
         static::assertEquals($response, $api->setActive($this->fakeId, $status));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldCreateWebhook(): void
     {
         $response = [
@@ -133,7 +119,7 @@ class WebhookApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('post')
             ->with($this->apiPath)
             ->willReturn($response);
@@ -141,9 +127,7 @@ class WebhookApiTest extends ApiTestCase
         static::assertEquals($response, $api->create($response));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldNotCreateWebhookWithoutCallbackUrl(): void
     {
         $this->expectException(MissingArgumentException::class);
@@ -153,14 +137,12 @@ class WebhookApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::never())->method('post');
+        $api->expects($this->never())->method('post');
 
         $api->create($data);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldNotCreateWebhookWithoutModelId(): void
     {
         $this->expectException(MissingArgumentException::class);
@@ -170,14 +152,12 @@ class WebhookApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::never())->method('post');
+        $api->expects($this->never())->method('post');
 
         $api->create($data);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldUpdateWebhook(): void
     {
         $response = [
@@ -186,7 +166,7 @@ class WebhookApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with($this->apiPath.'/'.$this->fakeId)
             ->willReturn($response);
@@ -194,9 +174,7 @@ class WebhookApiTest extends ApiTestCase
         static::assertEquals($response, $api->update($this->fakeId, $response));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldNotUpdateWebhookWithoutCallbackUrl(): void
     {
         $this->expectException(MissingArgumentException::class);
@@ -206,14 +184,12 @@ class WebhookApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::never())->method('post');
+        $api->expects($this->never())->method('post');
 
         $api->update($this->fakeId, $data);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldNotUpdateWebhookWithoutModelId(): void
     {
         $this->expectException(MissingArgumentException::class);
@@ -223,12 +199,12 @@ class WebhookApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::never())->method('post');
+        $api->expects($this->never())->method('post');
 
         $api->update($this->fakeId, $data);
     }
 
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return WebhookApi::class;
     }

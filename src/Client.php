@@ -19,14 +19,8 @@ use Semaio\TrelloApi\Client\TrelloClientInterface;
 
 class Client implements ClientInterface
 {
-    /**
-     * @var TrelloClientInterface
-     */
-    private $trelloClient;
-
-    public function __construct(TrelloClientInterface $trelloClient)
+    public function __construct(private readonly TrelloClientInterface $trelloClient)
     {
-        $this->trelloClient = $trelloClient;
     }
 
     public static function create(TrelloClientInterface $trelloClient): ClientInterface

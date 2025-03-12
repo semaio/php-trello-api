@@ -16,7 +16,7 @@ class TokenApi extends AbstractApi
     /**
      * @see https://trello.com/docs/api/token/#get-1-tokens-token-field
      */
-    public static $fields = [
+    public static array $fields = [
         'identifier',
         'idMember',
         'dateCreated',
@@ -24,7 +24,7 @@ class TokenApi extends AbstractApi
         'permissions',
     ];
 
-    protected $path = 'tokens';
+    protected string $path = 'tokens';
 
     /**
      * Find a token by id.

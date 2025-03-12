@@ -14,7 +14,7 @@ use Semaio\TrelloApi\Exception\InvalidArgumentException;
  */
 class BoardLabelsApi extends AbstractApi
 {
-    protected $path = 'boards/#id#/labels';
+    protected string $path = 'boards/#id#/labels';
 
     /**
      * Get labels related to a given board.

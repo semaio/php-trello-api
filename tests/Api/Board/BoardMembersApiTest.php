@@ -4,26 +4,24 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests\Api\Board;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Semaio\TrelloApi\Api\Board\BoardMembersApi;
 use Semaio\TrelloApi\Exception\InvalidArgumentException;
 use Semaio\TrelloApi\Tests\Api\ApiTestCase;
 
-/**
- * @group unit
- */
+#[Group('unit')]
 class BoardMembersApiTest extends ApiTestCase
 {
-    protected $apiPath = 'boards/#id#/members';
+    protected string $apiPath = 'boards/#id#/members';
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetAllMembers(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath())
             ->willReturn($response);
@@ -31,15 +29,13 @@ class BoardMembersApiTest extends ApiTestCase
         static::assertEquals($response, $api->all($this->fakeParentId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldRemoveMember(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('delete')
             ->with($this->getPath().'/'.$this->fakeId)
             ->willReturn($response);
@@ -47,15 +43,13 @@ class BoardMembersApiTest extends ApiTestCase
         static::assertEquals($response, $api->remove($this->fakeParentId, $this->fakeId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldInviteMember(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with($this->getPath())
             ->willReturn($response);
@@ -63,28 +57,24 @@ class BoardMembersApiTest extends ApiTestCase
         static::assertEquals($response, $api->invite($this->fakeParentId, 'john@doe.com', 'John Doe', 'normal'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldNotInviteMemberWithUnexistingRole(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
         $api = $this->getApiMock();
-        $api->expects(static::never())->method('put');
+        $api->expects($this->never())->method('put');
 
         $api->invite($this->fakeParentId, 'john@doe.com', 'John Doe', 'unexisting');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetMemberCards(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath().'/'.$this->fakeId.'/cards')
             ->willReturn($response);
@@ -92,9 +82,7 @@ class BoardMembersApiTest extends ApiTestCase
         static::assertEquals($response, $api->cards($this->fakeParentId, $this->fakeId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldFilterMembersWithDefaultFilter(): void
     {
         $response = ['response'];
@@ -102,7 +90,7 @@ class BoardMembersApiTest extends ApiTestCase
         $defaultFilter = 'all';
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath().'/'.$defaultFilter)
             ->willReturn($response);
@@ -110,9 +98,7 @@ class BoardMembersApiTest extends ApiTestCase
         static::assertEquals($response, $api->filter($this->fakeParentId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldFilterMembersWithStringArgument(): void
     {
         $response = ['response'];
@@ -120,7 +106,7 @@ class BoardMembersApiTest extends ApiTestCase
         $filter = 'admins';
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath().'/admins')
             ->willReturn($response);
@@ -128,9 +114,7 @@ class BoardMembersApiTest extends ApiTestCase
         static::assertEquals($response, $api->filter($this->fakeParentId, $filter));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldFilterMembersWithArrayArgument(): void
     {
         $response = ['response'];
@@ -138,7 +122,7 @@ class BoardMembersApiTest extends ApiTestCase
         $filter = ['admins', 'owners'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath().'/admins,owners')
             ->willReturn($response);
@@ -146,15 +130,13 @@ class BoardMembersApiTest extends ApiTestCase
         static::assertEquals($response, $api->filters($this->fakeParentId, $filter));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetInvitedMembers(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath().'Invited')
             ->willReturn($response);
@@ -162,15 +144,13 @@ class BoardMembersApiTest extends ApiTestCase
         static::assertEquals($response, $api->getInvitedMembers($this->fakeParentId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetInvitedMembersField(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath().'Invited/bio')
             ->willReturn($response);
@@ -178,28 +158,24 @@ class BoardMembersApiTest extends ApiTestCase
         static::assertEquals($response, $api->getInvitedMembersField($this->fakeParentId, 'bio'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldNotGetUnexistingInvitedMembersField(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
         $api = $this->getApiMock();
-        $api->expects(static::never())->method('get');
+        $api->expects($this->never())->method('get');
 
         $api->getInvitedMembersField($this->fakeParentId, 'unexisting');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldSetRole(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('post')
             ->with($this->getPath().'/'.$this->fakeId)
             ->willReturn($response);
@@ -207,20 +183,18 @@ class BoardMembersApiTest extends ApiTestCase
         static::assertEquals($response, $api->setRole($this->fakeParentId, $this->fakeId, 'normal'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldNotSetUnexistingRole(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
         $api = $this->getApiMock();
-        $api->expects(static::never())->method('post');
+        $api->expects($this->never())->method('post');
 
         $api->setRole($this->fakeParentId, $this->fakeId, 'unexisting');
     }
 
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return BoardMembersApi::class;
     }

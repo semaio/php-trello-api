@@ -17,5 +17,5 @@ use Semaio\TrelloApi\Api\AbstractApi;
  */
 class MemberCustomStickersApi extends AbstractApi
 {
-    protected $path = 'members/#id#/customStickers';
+    protected string $path = 'members/#id#/customStickers';
 }

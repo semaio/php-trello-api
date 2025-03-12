@@ -13,7 +13,7 @@ use Semaio\TrelloApi\Api\AbstractApi;
  */
 class BoardChecklistsApi extends AbstractApi
 {
-    protected $path = 'boards/#id#/checklists';
+    protected string $path = 'boards/#id#/checklists';
 
     /**
      * Get cards related to a given board.

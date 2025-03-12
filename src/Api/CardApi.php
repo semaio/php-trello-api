@@ -28,7 +28,7 @@ class CardApi extends AbstractApi
     /**
      * @see https://trello.com/docs/api/card/#get-1-cards-card-id-or-shortlink-field
      */
-    public static $fields = [
+    public static array $fields = [
         'badges',
         'checkItemStates',
         'closed',
@@ -54,7 +54,7 @@ class CardApi extends AbstractApi
         'url',
     ];
 
-    protected $path = 'cards';
+    protected string $path = 'cards';
 
     /**
      * Find a card by id.

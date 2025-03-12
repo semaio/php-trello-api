@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests\Client;
 
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
@@ -23,23 +26,26 @@ class HttpClientTest extends TestCase
     /**
      * @var ClientInterface|MockObject
      */
-    protected $baseHttpClient;
+    protected ClientInterface|MockObject $baseHttpClient;
 
     /**
      * @var RequestFactoryInterface|MockObject
      */
-    protected $requestFactory;
+    protected MockObject|RequestFactoryInterface $requestFactory;
 
     /**
      * @var StreamFactoryInterface|MockObject
      */
-    protected $streamFactory;
+    protected MockObject|StreamFactoryInterface $streamFactory;
 
     /**
      * @var HttpClient
      */
-    protected $httpClient;
+    protected HttpClient $httpClient;
 
+    /**
+     * @throws Exception
+     */
     protected function setUp(): void
     {
         $this->baseHttpClient = $this->createMock(ClientInterface::class);
@@ -53,9 +59,7 @@ class HttpClientTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_create_http_client(): void
     {
         $client = HttpClient::create($this->baseHttpClient, $this->requestFactory, $this->streamFactory);
@@ -64,8 +68,10 @@ class HttpClientTest extends TestCase
     }
 
     /**
-     * @test
+     * @throws Exception
+     * @throws ClientExceptionInterface
      */
+    #[Test]
     public function it_can_send_request_with_string_body(): void
     {
         $httpMethod = 'POST';
@@ -75,7 +81,7 @@ class HttpClientTest extends TestCase
         /** @var MockObject|RequestInterface $request */
         $request = $this->createMock(RequestInterface::class);
 
-        $this->requestFactory->expects(static::once())
+        $this->requestFactory->expects($this->once())
             ->method('createRequest')
             ->with($httpMethod, $uri)
             ->willReturn($request);
@@ -83,12 +89,12 @@ class HttpClientTest extends TestCase
         /** @var MockObject|StreamInterface $stream */
         $stream = $this->createMock(StreamInterface::class);
 
-        $this->streamFactory->expects(static::once())
+        $this->streamFactory->expects($this->once())
             ->method('createStream')
             ->with($body)
             ->willReturn($stream);
 
-        $request->expects(static::once())
+        $request->expects($this->once())
             ->method('withBody')
             ->with($stream)
             ->willReturnSelf();
@@ -96,7 +102,7 @@ class HttpClientTest extends TestCase
         /** @var MockObject|ResponseInterface $response */
         $response = $this->createMock(ResponseInterface::class);
 
-        $this->baseHttpClient->expects(static::once())
+        $this->baseHttpClient->expects($this->once())
             ->method('sendRequest')
             ->with($request)
             ->willReturn($response);
@@ -105,8 +111,10 @@ class HttpClientTest extends TestCase
     }
 
     /**
-     * @test
+     * @throws ClientExceptionInterface
+     * @throws Exception
      */
+    #[Test]
     public function it_can_send_request_with_stream_body(): void
     {
         $httpMethod = 'POST';
@@ -117,12 +125,12 @@ class HttpClientTest extends TestCase
         /** @var MockObject|RequestInterface $request */
         $request = $this->createMock(RequestInterface::class);
 
-        $this->requestFactory->expects(static::once())
+        $this->requestFactory->expects($this->once())
             ->method('createRequest')
             ->with($httpMethod, $uri)
             ->willReturn($request);
 
-        $request->expects(static::once())
+        $request->expects($this->once())
             ->method('withBody')
             ->with($body)
             ->willReturnSelf();
@@ -130,7 +138,7 @@ class HttpClientTest extends TestCase
         /** @var MockObject|ResponseInterface $response */
         $response = $this->createMock(ResponseInterface::class);
 
-        $this->baseHttpClient->expects(static::once())
+        $this->baseHttpClient->expects($this->once())
             ->method('sendRequest')
             ->with($request)
             ->willReturn($response);
@@ -139,8 +147,10 @@ class HttpClientTest extends TestCase
     }
 
     /**
-     * @test
+     * @throws Exception
+     * @throws ClientExceptionInterface
      */
+    #[Test]
     public function it_can_send_request(): void
     {
         $httpMethod = 'POST';
@@ -152,12 +162,12 @@ class HttpClientTest extends TestCase
         /** @var MockObject|RequestInterface $request */
         $request = $this->createMock(RequestInterface::class);
 
-        $this->requestFactory->expects(static::once())
+        $this->requestFactory->expects($this->once())
             ->method('createRequest')
             ->with($httpMethod, $uri)
             ->willReturn($request);
 
-        $request->expects(static::once())
+        $request->expects($this->once())
             ->method('withHeader')
             ->with('header', 'content')
             ->willReturnSelf();
@@ -165,11 +175,11 @@ class HttpClientTest extends TestCase
         /** @var MockObject|ResponseInterface $response */
         $response = $this->createMock(ResponseInterface::class);
 
-        $this->baseHttpClient->expects(static::once())
+        $this->baseHttpClient->expects($this->once())
             ->method('sendRequest')
             ->with($request)
             ->willReturn($response);
 
-        $this->httpClient->sendRequest($httpMethod, $uri, $headers, null);
+        $this->httpClient->sendRequest($httpMethod, $uri, $headers);
     }
 }

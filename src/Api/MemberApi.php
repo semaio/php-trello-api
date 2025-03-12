@@ -35,7 +35,7 @@ class MemberApi extends AbstractApi
     /**
      * @see https://trello.com/docs/api/member/#get-1-members-idmember-or-username-field
      */
-    public static $fields = [
+    public static array $fields = [
         'avatarHash',
         'bio',
         'bioData',
@@ -64,7 +64,7 @@ class MemberApi extends AbstractApi
         'premiumFeatures',
     ];
 
-    protected $path = 'members';
+    protected string $path = 'members';
 
     /**
      * Find a member by id or username.

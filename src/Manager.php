@@ -25,16 +25,10 @@ use Semaio\TrelloApi\Model\WebhookModelInterface;
 class Manager implements ManagerInterface
 {
     /**
-     * @var ClientInterface
-     */
-    protected $client;
-
-    /**
      * Constructor.
      */
-    public function __construct(ClientInterface $client)
+    public function __construct(protected ClientInterface $client)
     {
-        $this->client = $client;
     }
 
     /**

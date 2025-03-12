@@ -13,7 +13,7 @@ use Semaio\TrelloApi\Api\AbstractApi;
  */
 class CardLabelsApi extends AbstractApi
 {
-    protected $path = 'cards/#id#/labels';
+    protected string $path = 'cards/#id#/labels';
 
     /**
      * Set a given card's labels.

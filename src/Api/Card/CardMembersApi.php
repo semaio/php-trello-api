@@ -14,7 +14,7 @@ use Semaio\TrelloApi\Exception\InvalidArgumentException;
  */
 class CardMembersApi extends AbstractApi
 {
-    protected $path = 'cards/#id#/members';
+    protected string $path = 'cards/#id#/members';
 
     /**
      * Get members related to a given card.

@@ -1,7 +1,7 @@
 PHP Trello API v1 client
 ========================
 
-![tests](https://github.com/semaio/php-trello-api/workflows/run-tests/badge.svg?branch=master)
+![tests](https://github.com/josrom/php-trello-api/workflows/run-tests/badge.svg?branch=master)
 
 This library is based on the great [php-trello-api](https://github.com/cdaguerre/php-trello-api/) but updated and modernized for usage with PHP 7.3+ and a modern version of Guzzle.
 
@@ -12,7 +12,7 @@ This library is based on the great [php-trello-api](https://github.com/cdaguerre
 The recommended way is using [composer](http://getcomposer.org):
 
 ```bash
-$ composer require semaio/php-trello-api
+$ composer require josrom/php-trello-api
 ```
 
 ## Usage
@@ -40,7 +40,7 @@ $client->getCardApi()->create( $card );
 
 ## Support
 
-If you encounter any problems or bugs, please create an issue on [GitHub](https://github.com/semaio/php-trello-api/issues).
+If you encounter any problems or bugs, please create an issue on [GitHub](https://github.com/josrom/php-trello-api/issues).
 
 ## Contribution
 

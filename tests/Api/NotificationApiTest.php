@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests\Api;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Semaio\TrelloApi\Api\NotificationApi;
 use Semaio\TrelloApi\Exception\InvalidArgumentException;
 
-/**
- * @group unit
- */
+#[Group('unit')]
 class NotificationApiTest extends ApiTestCase
 {
-    protected $apiPath = 'notifications';
+    protected string $apiPath = 'notifications';
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldShowNotification(): void
     {
         $response = [
@@ -24,7 +22,7 @@ class NotificationApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with('notifications/'.$this->fakeId)
             ->willReturn($response);
@@ -32,9 +30,7 @@ class NotificationApiTest extends ApiTestCase
         static::assertEquals($response, $api->show($this->fakeId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldUpdateNotification(): void
     {
         $response = [
@@ -42,7 +38,7 @@ class NotificationApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with('notifications/'.$this->fakeId)
             ->willReturn($response);
@@ -50,9 +46,7 @@ class NotificationApiTest extends ApiTestCase
         static::assertEquals($response, $api->update($this->fakeId, $response));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldSetUnread(): void
     {
         $response = [
@@ -60,7 +54,7 @@ class NotificationApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with('notifications/'.$this->fakeId.'/unread')
             ->willReturn($response);
@@ -68,15 +62,13 @@ class NotificationApiTest extends ApiTestCase
         static::assertEquals($response, $api->setUnread($this->fakeId, true));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldSetAllRead(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('post')
             ->with('notifications/all/read')
             ->willReturn($response);
@@ -84,15 +76,13 @@ class NotificationApiTest extends ApiTestCase
         static::assertEquals($response, $api->setAllRead());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetEntities(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with('notifications/'.$this->fakeId.'/entities')
             ->willReturn($response);
@@ -100,15 +90,13 @@ class NotificationApiTest extends ApiTestCase
         static::assertEquals($response, $api->getEntities($this->fakeId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetBoard(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->apiPath.'/'.$this->fakeParentId.'/board')
             ->willReturn($response);
@@ -116,15 +104,13 @@ class NotificationApiTest extends ApiTestCase
         static::assertEquals($response, $api->getBoard($this->fakeParentId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetBoardField(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->apiPath.'/'.$this->fakeParentId.'/board/name')
             ->willReturn($response);
@@ -132,28 +118,24 @@ class NotificationApiTest extends ApiTestCase
         static::assertEquals($response, $api->getBoardField($this->fakeParentId, 'name'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldNotGetUnexistingBoardField(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
         $api = $this->getApiMock();
-        $api->expects(static::never())->method('get');
+        $api->expects($this->never())->method('get');
 
         $api->getBoardField($this->fakeParentId, 'unexisting');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetList(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->apiPath.'/'.$this->fakeParentId.'/list')
             ->willReturn($response);
@@ -161,15 +143,13 @@ class NotificationApiTest extends ApiTestCase
         static::assertEquals($response, $api->getList($this->fakeParentId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetListField(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->apiPath.'/'.$this->fakeParentId.'/list/name')
             ->willReturn($response);
@@ -177,28 +157,24 @@ class NotificationApiTest extends ApiTestCase
         static::assertEquals($response, $api->getListField($this->fakeParentId, 'name'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldNotGetUnexistingListField(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
         $api = $this->getApiMock();
-        $api->expects(static::never())->method('get');
+        $api->expects($this->never())->method('get');
 
         $api->getListField($this->fakeParentId, 'unexisting');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetCard(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->apiPath.'/'.$this->fakeParentId.'/card')
             ->willReturn($response);
@@ -206,15 +182,13 @@ class NotificationApiTest extends ApiTestCase
         static::assertEquals($response, $api->getCard($this->fakeParentId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetCardField(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->apiPath.'/'.$this->fakeParentId.'/card/name')
             ->willReturn($response);
@@ -222,28 +196,24 @@ class NotificationApiTest extends ApiTestCase
         static::assertEquals($response, $api->getCardField($this->fakeParentId, 'name'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldNotGetUnexistingCardField(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
         $api = $this->getApiMock();
-        $api->expects(static::never())->method('get');
+        $api->expects($this->never())->method('get');
 
         $api->getCardField($this->fakeParentId, 'unexisting');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetMember(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->apiPath.'/'.$this->fakeParentId.'/member')
             ->willReturn($response);
@@ -251,15 +221,13 @@ class NotificationApiTest extends ApiTestCase
         static::assertEquals($response, $api->getMember($this->fakeParentId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetMemberField(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->apiPath.'/'.$this->fakeParentId.'/member/bio')
             ->willReturn($response);
@@ -267,28 +235,24 @@ class NotificationApiTest extends ApiTestCase
         static::assertEquals($response, $api->getMemberField($this->fakeParentId, 'bio'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldNotGetUnexistingMemberField(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
         $api = $this->getApiMock();
-        $api->expects(static::never())->method('get');
+        $api->expects($this->never())->method('get');
 
         $api->getMemberField($this->fakeParentId, 'unexisting');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetCreator(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->apiPath.'/'.$this->fakeParentId.'/memberCreator')
             ->willReturn($response);
@@ -296,15 +260,13 @@ class NotificationApiTest extends ApiTestCase
         static::assertEquals($response, $api->getCreator($this->fakeParentId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetCreatorField(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->apiPath.'/'.$this->fakeParentId.'/memberCreator/bio')
             ->willReturn($response);
@@ -312,28 +274,24 @@ class NotificationApiTest extends ApiTestCase
         static::assertEquals($response, $api->getCreatorField($this->fakeParentId, 'bio'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldNotGetUnexistingCreatorField(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
         $api = $this->getApiMock();
-        $api->expects(static::never())->method('get');
+        $api->expects($this->never())->method('get');
 
         $api->getCreatorField($this->fakeParentId, 'unexisting');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetOrganization(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->apiPath.'/'.$this->fakeParentId.'/organization')
             ->willReturn($response);
@@ -341,15 +299,13 @@ class NotificationApiTest extends ApiTestCase
         static::assertEquals($response, $api->getOrganization($this->fakeParentId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetOrganizationField(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->apiPath.'/'.$this->fakeParentId.'/organization/name')
             ->willReturn($response);
@@ -357,20 +313,18 @@ class NotificationApiTest extends ApiTestCase
         static::assertEquals($response, $api->getOrganizationField($this->fakeParentId, 'name'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldNotGetUnexistingOrganizationField(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
         $api = $this->getApiMock();
-        $api->expects(static::never())->method('get');
+        $api->expects($this->never())->method('get');
 
         $api->getOrganizationField($this->fakeParentId, 'unexisting');
     }
 
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return NotificationApi::class;
     }
