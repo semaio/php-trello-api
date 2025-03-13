@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests\Api\Checklist;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Semaio\TrelloApi\Api\Checklist\ChecklistItemsApi;
 use Semaio\TrelloApi\Tests\Api\ApiTestCase;
 
-/**
- * @group unit
- */
+#[Group('unit')]
 class ChecklistItemsApiTest extends ApiTestCase
 {
-    protected $apiPath = 'checklists/#id#/checkItems';
+    protected string $apiPath = 'checklists/#id#/checkItems';
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetAllItems(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath())
             ->willReturn($response);
@@ -30,9 +28,7 @@ class ChecklistItemsApiTest extends ApiTestCase
         static::assertEquals($response, $api->all($this->fakeParentId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldUpdateItem(): void
     {
         $response = [
@@ -41,11 +37,11 @@ class ChecklistItemsApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('delete')
             ->with($this->getPath().'/'.$this->fakeId);
 
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('post')
             ->with($this->getPath())
             ->willReturn($response);
@@ -53,15 +49,13 @@ class ChecklistItemsApiTest extends ApiTestCase
         static::assertEquals($response, $api->update($this->fakeParentId, $this->fakeId, $response));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldRemoveItem(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('delete')
             ->with($this->getPath().'/'.$this->fakeId)
             ->willReturn($response);
@@ -69,9 +63,7 @@ class ChecklistItemsApiTest extends ApiTestCase
         static::assertEquals($response, $api->remove($this->fakeParentId, $this->fakeId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldCreateItem(): void
     {
         $response = ['response'];
@@ -79,7 +71,7 @@ class ChecklistItemsApiTest extends ApiTestCase
         $name = 'Test Item';
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('post')
             ->with($this->getPath())
             ->willReturn($response);
@@ -87,7 +79,7 @@ class ChecklistItemsApiTest extends ApiTestCase
         static::assertEquals($response, $api->create($this->fakeParentId, $name, [], true));
     }
 
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return ChecklistItemsApi::class;
     }

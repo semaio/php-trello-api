@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests\Routing;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Semaio\TrelloApi\Configuration\Configuration;
 use Semaio\TrelloApi\Routing\UriGenerator;
@@ -13,9 +14,7 @@ use Semaio\TrelloApi\Routing\UriGenerator;
  */
 class UriGeneratorTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function itCanGenerateUrl(): void
     {
         $uriGenerator = new UriGenerator(Configuration::create('KEY', 'TOKEN'));

@@ -31,7 +31,7 @@ class BoardApi extends AbstractApi
     /**
      * @see https://trello.com/docs/api/board/#get-1-boards-board-id-field
      */
-    public static $fields = [
+    public static array $fields = [
         'name',
         'desc',
         'descData',
@@ -53,7 +53,7 @@ class BoardApi extends AbstractApi
         'shortUrl',
     ];
 
-    protected $path = 'boards';
+    protected string $path = 'boards';
 
     /**
      * Find a board by id.

@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Semaio\TrelloApi\Client;
 use Semaio\TrelloApi\Client\TrelloClientInterface;
+use Semaio\TrelloApi\ClientInterface;
 use Semaio\TrelloApi\Manager;
 use Semaio\TrelloApi\Model\ActionModelInterface;
 use Semaio\TrelloApi\Model\BoardModelInterface;
@@ -21,9 +23,7 @@ use Semaio\TrelloApi\Model\WebhookModelInterface;
 
 class ManagerTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_action_model(): void
     {
         static::assertInstanceOf(
@@ -32,9 +32,7 @@ class ManagerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_board_model(): void
     {
         static::assertInstanceOf(
@@ -43,9 +41,7 @@ class ManagerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_board_model_with_id(): void
     {
         static::assertInstanceOf(
@@ -54,9 +50,7 @@ class ManagerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_card_model(): void
     {
         static::assertInstanceOf(
@@ -65,9 +59,7 @@ class ManagerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_card_model_with_id(): void
     {
         static::assertInstanceOf(
@@ -76,9 +68,7 @@ class ManagerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_cardlist_model(): void
     {
         static::assertInstanceOf(
@@ -87,9 +77,7 @@ class ManagerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_cardlist_model_with_id(): void
     {
         static::assertInstanceOf(
@@ -98,9 +86,7 @@ class ManagerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_checklist_model(): void
     {
         static::assertInstanceOf(
@@ -109,9 +95,7 @@ class ManagerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_checklist_model_with_id(): void
     {
         static::assertInstanceOf(
@@ -120,9 +104,7 @@ class ManagerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_member_model(): void
     {
         static::assertInstanceOf(
@@ -131,9 +113,7 @@ class ManagerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_member_model_with_id(): void
     {
         static::assertInstanceOf(
@@ -142,9 +122,7 @@ class ManagerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_organization_model(): void
     {
         static::assertInstanceOf(
@@ -153,9 +131,7 @@ class ManagerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_organization_model_with_id(): void
     {
         static::assertInstanceOf(
@@ -164,9 +140,7 @@ class ManagerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_token_model(): void
     {
         static::assertInstanceOf(
@@ -175,9 +149,7 @@ class ManagerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_webhook_model(): void
     {
         static::assertInstanceOf(
@@ -186,26 +158,26 @@ class ManagerTest extends TestCase
         );
     }
 
-    private function getManager(bool $expectsGetMethodCalled)
+    private function getManager(bool $expectsGetMethodCalled): Manager
     {
         return new Manager($this->getClient($expectsGetMethodCalled));
     }
 
-    private function getClient(bool $expectsGetMethodCalled)
+    private function getClient(bool $expectsGetMethodCalled): ClientInterface
     {
         return Client::create($this->getTrelloClientMock($expectsGetMethodCalled));
     }
 
-    private function getTrelloClientMock(bool $expectsGetMethodCalled): MockObject
+    private function getTrelloClientMock(bool $expectsGetMethodCalled): MockObject|TrelloClientInterface
     {
         $mock = $this->getMockBuilder(TrelloClientInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         if ($expectsGetMethodCalled) {
-            $mock->expects(static::once())->method('get');
+            $mock->expects($this->once())->method('get');
         } else {
-            $mock->expects(static::never())->method('get');
+            $mock->expects($this->never())->method('get');
         }
 
         return $mock;

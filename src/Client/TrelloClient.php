@@ -9,22 +9,10 @@ use Semaio\TrelloApi\Routing\UriGeneratorInterface;
 class TrelloClient implements TrelloClientInterface
 {
     /**
-     * @var HttpClientInterface
-     */
-    private $httpClient;
-
-    /**
-     * @var UriGeneratorInterface
-     */
-    private $uriGenerator;
-
-    /**
      * ResourceClient constructor.
      */
-    public function __construct(HttpClientInterface $httpClient, UriGeneratorInterface $uriGenerator)
+    public function __construct(private readonly HttpClientInterface $httpClient, private readonly UriGeneratorInterface $uriGenerator)
     {
-        $this->httpClient = $httpClient;
-        $this->uriGenerator = $uriGenerator;
     }
 
     public static function create(HttpClientInterface $httpClient, UriGeneratorInterface $uriGenerator): TrelloClientInterface

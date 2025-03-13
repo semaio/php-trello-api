@@ -13,7 +13,7 @@ use Semaio\TrelloApi\Api\AbstractApi;
  */
 class CardAttachmentsApi extends AbstractApi
 {
-    protected $path = 'cards/#id#/attachments';
+    protected string $path = 'cards/#id#/attachments';
 
     /**
      * Get attachments related to a given card.

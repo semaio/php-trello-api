@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests\Exception;
 
+use JsonException;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
@@ -19,24 +21,27 @@ class UnprocessableEntityHttpExceptionTest extends TestCase
     /**
      * @var RequestInterface|MockObject
      */
-    protected $request;
+    protected MockObject|RequestInterface $request;
 
     /**
      * @var ResponseInterface|MockObject
      */
-    protected $response;
+    protected ResponseInterface|MockObject $response;
 
     /**
      * @var UnprocessableEntityHttpException
      */
-    protected $unprocessableEntityHttpException;
+    protected UnprocessableEntityHttpException $unprocessableEntityHttpException;
 
+    /**
+     * @throws Exception
+     */
     protected function setUp(): void
     {
         $this->request = $this->createMock(RequestInterface::class);
         $this->response = $this->createMock(ResponseInterface::class);
 
-        $this->response->expects(static::any())
+        $this->response
             ->method('getStatusCode')
             ->willReturn(500);
 
@@ -47,20 +52,24 @@ class UnprocessableEntityHttpExceptionTest extends TestCase
         );
     }
 
+    /**
+     * @throws Exception
+     * @throws JsonException
+     */
     public function testGetResponseErrors(): void
     {
         /** @var MockObject|StreamInterface $stream */
         $stream = $this->createMock(StreamInterface::class);
 
-        $this->response->expects(static::once())
+        $this->response->expects($this->once())
             ->method('getBody')
             ->willReturn($stream);
 
-        $stream->expects(static::any())
+        $stream
             ->method('rewind')
             ->willReturnSelf();
 
-        $stream->expects(static::once())
+        $stream->expects($this->once())
             ->method('getContents')
             ->willReturn(json_encode(['contents']));
 

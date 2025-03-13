@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests\Api\Board;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Semaio\TrelloApi\Api\Board\BoardCardsApi;
 use Semaio\TrelloApi\Tests\Api\ApiTestCase;
 
-/**
- * @group unit
- */
+#[Group('unit')]
 class BoardCardsApiTest extends ApiTestCase
 {
-    protected $apiPath = 'boards/#id#/cards';
+    protected string $apiPath = 'boards/#id#/cards';
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetAllCards(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath())
             ->willReturn($response);
@@ -30,9 +28,7 @@ class BoardCardsApiTest extends ApiTestCase
         static::assertEquals($response, $api->all($this->fakeParentId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldFilterCardsWithDefaultFilter(): void
     {
         $response = ['response'];
@@ -40,7 +36,7 @@ class BoardCardsApiTest extends ApiTestCase
         $defaultFilter = 'all';
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath().'/'.$defaultFilter)
             ->willReturn($response);
@@ -48,9 +44,7 @@ class BoardCardsApiTest extends ApiTestCase
         static::assertEquals($response, $api->filter($this->fakeParentId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldFilterCardsWithStringArgument(): void
     {
         $response = ['response'];
@@ -58,7 +52,7 @@ class BoardCardsApiTest extends ApiTestCase
         $filter = 'open';
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath().'/open')
             ->willReturn($response);
@@ -66,9 +60,7 @@ class BoardCardsApiTest extends ApiTestCase
         static::assertEquals($response, $api->filter($this->fakeParentId, $filter));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldFilterCardsWithArrayArgument(): void
     {
         $response = ['response'];
@@ -76,7 +68,7 @@ class BoardCardsApiTest extends ApiTestCase
         $filter = ['open', 'closed'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath().'/open,closed')
             ->willReturn($response);
@@ -84,15 +76,13 @@ class BoardCardsApiTest extends ApiTestCase
         static::assertEquals($response, $api->filters($this->fakeParentId, $filter));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldShowCard(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath().'/'.$this->fakeId)
             ->willReturn($response);
@@ -100,7 +90,7 @@ class BoardCardsApiTest extends ApiTestCase
         static::assertEquals($response, $api->show($this->fakeParentId, $this->fakeId));
     }
 
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return BoardCardsApi::class;
     }

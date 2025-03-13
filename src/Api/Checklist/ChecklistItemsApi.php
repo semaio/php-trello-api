@@ -13,7 +13,7 @@ use Semaio\TrelloApi\Api\AbstractApi;
  */
 class ChecklistItemsApi extends AbstractApi
 {
-    public static $fields = [
+    public static array $fields = [
         'name',
         'nameData',
         'type',
@@ -21,7 +21,7 @@ class ChecklistItemsApi extends AbstractApi
         'state',
     ];
 
-    protected $path = 'checklists/#id#/checkItems';
+    protected string $path = 'checklists/#id#/checkItems';
 
     /**
      * Get items related to a given checklist.

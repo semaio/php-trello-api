@@ -16,36 +16,18 @@ use Psr\Http\Message\StreamInterface;
 class HttpClient implements HttpClientInterface
 {
     /**
-     * @var ClientInterface
-     */
-    protected $baseHttpClient;
-
-    /**
-     * @var RequestFactoryInterface
-     */
-    protected $requestFactory;
-
-    /**
      * @var HttpExceptionHandler
      */
-    protected $httpExceptionHandler;
-
-    /**
-     * @var StreamFactoryInterface
-     */
-    private $streamFactory;
+    protected HttpExceptionHandler $httpExceptionHandler;
 
     /**
      * HttpClient constructor.
      */
     public function __construct(
-        ClientInterface $baseHttpClient,
-        RequestFactoryInterface $requestFactory,
-        StreamFactoryInterface $streamFactory
+        protected ClientInterface $baseHttpClient,
+        protected RequestFactoryInterface $requestFactory,
+        private readonly StreamFactoryInterface $streamFactory
     ) {
-        $this->baseHttpClient = $baseHttpClient;
-        $this->requestFactory = $requestFactory;
-        $this->streamFactory = $streamFactory;
         $this->httpExceptionHandler = new HttpExceptionHandler();
     }
 

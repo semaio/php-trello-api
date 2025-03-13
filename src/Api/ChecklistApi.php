@@ -17,14 +17,14 @@ class ChecklistApi extends AbstractApi
     /**
      * @see https://trello.com/docs/api/list/#get-1-lists-list-id-or-shortlink-field
      */
-    public static $fields = [
+    public static array $fields = [
         'name',
         'idBoard',
         'idCard',
         'pos',
     ];
 
-    protected $path = 'checklists';
+    protected string $path = 'checklists';
 
     /**
      * Find a list by id.

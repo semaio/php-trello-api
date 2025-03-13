@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests\Api\Card;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Semaio\TrelloApi\Api\Card\CardActionsApi;
 use Semaio\TrelloApi\Tests\Api\ApiTestCase;
 
-/**
- * @group unit
- */
+#[Group('unit')]
 class CardActionsApiTest extends ApiTestCase
 {
-    protected $apiPath = 'cards/#id#/actions';
+    protected string $apiPath = 'cards/#id#/actions';
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetAllActions(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath())
             ->willReturn($response);
@@ -30,9 +28,7 @@ class CardActionsApiTest extends ApiTestCase
         static::assertEquals($response, $api->all($this->fakeParentId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldAddComment(): void
     {
         $response = ['response'];
@@ -40,7 +36,7 @@ class CardActionsApiTest extends ApiTestCase
         $text = 'Comment text';
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('post')
             ->with($this->getPath().'/comments')
             ->willReturn($response);
@@ -48,9 +44,7 @@ class CardActionsApiTest extends ApiTestCase
         static::assertEquals($response, $api->addComment($this->fakeParentId, $text));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldUpdateComment(): void
     {
         $response = ['response'];
@@ -58,7 +52,7 @@ class CardActionsApiTest extends ApiTestCase
         $text = 'Comment text updated';
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with($this->getPath().'/'.$this->fakeId.'/comments')
             ->willReturn($response);
@@ -66,15 +60,13 @@ class CardActionsApiTest extends ApiTestCase
         static::assertEquals($response, $api->updateComment($this->fakeParentId, $this->fakeId, $text));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldRemoveComment(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('delete')
             ->with($this->getPath().'/'.$this->fakeId.'/comments')
             ->willReturn($response);
@@ -82,7 +74,7 @@ class CardActionsApiTest extends ApiTestCase
         static::assertEquals($response, $api->removeComment($this->fakeParentId, $this->fakeId));
     }
 
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return CardActionsApi::class;
     }

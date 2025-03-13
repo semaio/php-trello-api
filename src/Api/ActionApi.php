@@ -14,14 +14,14 @@ class ActionApi extends AbstractApi
     /**
      * @see https://trello.com/docs/api/action/#get-1-actions-idaction-field
      */
-    public static $fields = [
+    public static array $fields = [
         'idMemberCreator',
         'data',
         'type',
         'date',
     ];
 
-    protected $path = 'actions';
+    protected string $path = 'actions';
 
     /**
      * Find an action by id.

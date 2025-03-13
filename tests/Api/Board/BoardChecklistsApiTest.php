@@ -4,26 +4,24 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests\Api\Board;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Semaio\TrelloApi\Api\Board\BoardChecklistsApi;
 use Semaio\TrelloApi\Exception\MissingArgumentException;
 use Semaio\TrelloApi\Tests\Api\ApiTestCase;
 
-/**
- * @group unit
- */
+#[Group('unit')]
 class BoardChecklistsApiTest extends ApiTestCase
 {
-    protected $apiPath = 'boards/#id#/checklists';
+    protected string $apiPath = 'boards/#id#/checklists';
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetAllChecklists(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath())
             ->willReturn($response);
@@ -31,9 +29,7 @@ class BoardChecklistsApiTest extends ApiTestCase
         static::assertEquals($response, $api->all($this->fakeParentId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldCreateChecklist(): void
     {
         $data = [
@@ -41,7 +37,7 @@ class BoardChecklistsApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('post')
             ->with($this->getPath())
             ->willReturn($data);
@@ -49,9 +45,7 @@ class BoardChecklistsApiTest extends ApiTestCase
         static::assertEquals($data, $api->create($this->fakeParentId, $data));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldNotCreateChecklistWithoutName(): void
     {
         $this->expectException(MissingArgumentException::class);
@@ -59,12 +53,12 @@ class BoardChecklistsApiTest extends ApiTestCase
         $data = [];
 
         $api = $this->getApiMock();
-        $api->expects(static::never())->method('post');
+        $api->expects($this->never())->method('post');
 
         $api->create($this->fakeParentId, $data);
     }
 
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return BoardChecklistsApi::class;
     }

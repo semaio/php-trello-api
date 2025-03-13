@@ -14,7 +14,7 @@ use Semaio\TrelloApi\WebhookEvents;
  */
 class MemberNotificationsApi extends AbstractApi
 {
-    protected $path = 'members/#id#/notifications';
+    protected string $path = 'members/#id#/notifications';
 
     /**
      * Get notifications related to a given list.

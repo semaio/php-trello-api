@@ -13,7 +13,7 @@ use Semaio\TrelloApi\Api\AbstractApi;
  */
 class MemberActionsApi extends AbstractApi
 {
-    protected $path = 'members/#id#/actions';
+    protected string $path = 'members/#id#/actions';
 
     /**
      * Get actions related to a given member.

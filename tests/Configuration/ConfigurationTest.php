@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests\Configuration;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Semaio\TrelloApi\Configuration\Configuration;
 use Semaio\TrelloApi\Exception\InvalidApiVersionException;
@@ -13,9 +14,7 @@ use Semaio\TrelloApi\Exception\InvalidApiVersionException;
  */
 class ConfigurationTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_build_configuration_object(): void
     {
         $baseUri = 'https://api.trello.com/1';
@@ -28,9 +27,7 @@ class ConfigurationTest extends TestCase
         static::assertEquals($apiToken, $configuration->getApiToken());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_not_use_invalid_api_version(): void
     {
         $this->expectException(InvalidApiVersionException::class);

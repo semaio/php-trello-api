@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests\Exception;
 
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
@@ -18,24 +19,27 @@ class HttpExceptionTest extends TestCase
     /**
      * @var RequestInterface|MockObject
      */
-    protected $request;
+    protected MockObject|RequestInterface $request;
 
     /**
      * @var ResponseInterface|MockObject
      */
-    protected $response;
+    protected ResponseInterface|MockObject $response;
 
     /**
      * @var HttpException
      */
-    protected $httpException;
+    protected HttpException $httpException;
 
+    /**
+     * @throws Exception
+     */
     protected function setUp(): void
     {
         $this->request = $this->createMock(RequestInterface::class);
         $this->response = $this->createMock(ResponseInterface::class);
 
-        $this->response->expects(static::any())
+        $this->response
             ->method('getStatusCode')
             ->willReturn(500);
 

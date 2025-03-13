@@ -4,22 +4,21 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests\Api\Organization;
 
+use PHPUnit\Framework\Attributes\Test;
 use Semaio\TrelloApi\Api\Organization\OrganizationBoardsApi;
 use Semaio\TrelloApi\Tests\Api\ApiTestCase;
 
 class OrganizationBoardsApiTest extends ApiTestCase
 {
-    protected $apiPath = 'organization/#id#/boards';
+    protected string $apiPath = 'organization/#id#/boards';
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetAllActions(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath())
             ->willReturn($response);
@@ -27,9 +26,7 @@ class OrganizationBoardsApiTest extends ApiTestCase
         static::assertEquals($response, $api->all($this->fakeParentId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldFilterOrganizationBoardsWithDefaultFilter(): void
     {
         $response = ['response'];
@@ -37,7 +34,7 @@ class OrganizationBoardsApiTest extends ApiTestCase
         $defaultFilter = 'all';
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath().'/'.$defaultFilter)
             ->willReturn($response);
@@ -45,9 +42,7 @@ class OrganizationBoardsApiTest extends ApiTestCase
         static::assertEquals($response, $api->filter($this->fakeParentId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldFilterOrganizationBoardssWithStringArgument(): void
     {
         $response = ['response'];
@@ -55,7 +50,7 @@ class OrganizationBoardsApiTest extends ApiTestCase
         $filter = 'members';
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath().'/members')
             ->willReturn($response);
@@ -63,9 +58,7 @@ class OrganizationBoardsApiTest extends ApiTestCase
         static::assertEquals($response, $api->filter($this->fakeParentId, $filter));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldFilterOrganizationBoardsWithArrayArgument(): void
     {
         $response = ['response'];
@@ -73,7 +66,7 @@ class OrganizationBoardsApiTest extends ApiTestCase
         $filter = ['members', 'public'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath().'/members,public')
             ->willReturn($response);
@@ -81,7 +74,7 @@ class OrganizationBoardsApiTest extends ApiTestCase
         static::assertEquals($response, $api->filters($this->fakeParentId, $filter));
     }
 
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return OrganizationBoardsApi::class;
     }

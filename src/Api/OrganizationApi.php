@@ -16,7 +16,7 @@ class OrganizationApi extends AbstractApi
     /**
      * @see https://trello.com/docs/api/organization/#get-1-organizations-idorg-or-name-field
      */
-    public static $fields = [
+    public static array $fields = [
         'name',
         'displayName',
         'desc',
@@ -35,7 +35,7 @@ class OrganizationApi extends AbstractApi
         'premiumFeatures',
     ];
 
-    protected $path = 'organizations';
+    protected string $path = 'organizations';
 
     /**
      * Find an organization by id.

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests\Client;
 
+use JsonException;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
@@ -18,28 +21,31 @@ class TrelloClientTest extends TestCase
     /**
      * @var HttpClientInterface|MockObject
      */
-    protected $httpClient;
+    protected MockObject|HttpClientInterface $httpClient;
 
     /**
      * @var UriGeneratorInterface|MockObject
      */
-    protected $uriGenerator;
+    protected MockObject|UriGeneratorInterface $uriGenerator;
 
     /**
      * @var ResponseInterface|MockObject
      */
-    protected $response;
+    protected ResponseInterface|MockObject $response;
 
     /**
      * @var StreamInterface|MockObject
      */
-    protected $stream;
+    protected MockObject|StreamInterface $stream;
 
     /**
      * @var TrelloClient
      */
-    protected $trelloClient;
+    protected TrelloClient $trelloClient;
 
+    /**
+     * @throws Exception
+     */
     protected function setUp(): void
     {
         $this->httpClient = $this->createMock(HttpClientInterface::class);
@@ -53,9 +59,7 @@ class TrelloClientTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_create_trello_client(): void
     {
         $client = TrelloClient::create($this->httpClient, $this->uriGenerator);
@@ -64,26 +68,27 @@ class TrelloClientTest extends TestCase
     }
 
     /**
-     * @test
+     * @throws JsonException
      */
+    #[Test]
     public function it_can_send_get_requests(): void
     {
         $generatedUri = 'path?key=value';
         $contents = ['contents'];
 
-        $this->uriGenerator->expects(static::once())
+        $this->uriGenerator->expects($this->once())
             ->method('generate')
             ->willReturn($generatedUri);
 
-        $this->response->expects(static::once())
+        $this->response->expects($this->once())
             ->method('getBody')
             ->willReturn($this->stream);
 
-        $this->stream->expects(static::once())
+        $this->stream->expects($this->once())
             ->method('getContents')
             ->willReturn(json_encode($contents));
 
-        $this->httpClient->expects(static::once())
+        $this->httpClient->expects($this->once())
             ->method('sendRequest')
             ->with('GET', $generatedUri)
             ->willReturn($this->response);
@@ -97,26 +102,27 @@ class TrelloClientTest extends TestCase
     }
 
     /**
-     * @test
+     * @throws JsonException
      */
+    #[Test]
     public function it_can_send_head_requests(): void
     {
         $generatedUri = 'path?key=value';
         $contents = ['contents'];
 
-        $this->uriGenerator->expects(static::once())
+        $this->uriGenerator->expects($this->once())
             ->method('generate')
             ->willReturn($generatedUri);
 
-        $this->response->expects(static::once())
+        $this->response->expects($this->once())
             ->method('getBody')
             ->willReturn($this->stream);
 
-        $this->stream->expects(static::once())
+        $this->stream->expects($this->once())
             ->method('getContents')
             ->willReturn(json_encode($contents));
 
-        $this->httpClient->expects(static::once())
+        $this->httpClient->expects($this->once())
             ->method('sendRequest')
             ->with('HEAD', $generatedUri)
             ->willReturn($this->response);
@@ -130,26 +136,27 @@ class TrelloClientTest extends TestCase
     }
 
     /**
-     * @test
+     * @throws JsonException
      */
+    #[Test]
     public function it_can_send_post_requests(): void
     {
         $generatedUri = 'path?key=value';
         $contents = ['contents'];
 
-        $this->uriGenerator->expects(static::once())
+        $this->uriGenerator->expects($this->once())
             ->method('generate')
             ->willReturn($generatedUri);
 
-        $this->response->expects(static::once())
+        $this->response->expects($this->once())
             ->method('getBody')
             ->willReturn($this->stream);
 
-        $this->stream->expects(static::once())
+        $this->stream->expects($this->once())
             ->method('getContents')
             ->willReturn(json_encode($contents));
 
-        $this->httpClient->expects(static::once())
+        $this->httpClient->expects($this->once())
             ->method('sendRequest')
             ->with('POST', $generatedUri)
             ->willReturn($this->response);
@@ -163,26 +170,27 @@ class TrelloClientTest extends TestCase
     }
 
     /**
-     * @test
+     * @throws JsonException
      */
+    #[Test]
     public function it_can_send_patch_requests(): void
     {
         $generatedUri = 'path?key=value';
         $contents = ['contents'];
 
-        $this->uriGenerator->expects(static::once())
+        $this->uriGenerator->expects($this->once())
             ->method('generate')
             ->willReturn($generatedUri);
 
-        $this->response->expects(static::once())
+        $this->response->expects($this->once())
             ->method('getBody')
             ->willReturn($this->stream);
 
-        $this->stream->expects(static::once())
+        $this->stream->expects($this->once())
             ->method('getContents')
             ->willReturn(json_encode($contents));
 
-        $this->httpClient->expects(static::once())
+        $this->httpClient->expects($this->once())
             ->method('sendRequest')
             ->with('PATCH', $generatedUri)
             ->willReturn($this->response);
@@ -196,26 +204,27 @@ class TrelloClientTest extends TestCase
     }
 
     /**
-     * @test
+     * @throws JsonException
      */
+    #[Test]
     public function it_can_send_put_requests(): void
     {
         $generatedUri = 'path?key=value';
         $contents = ['contents'];
 
-        $this->uriGenerator->expects(static::once())
+        $this->uriGenerator->expects($this->once())
             ->method('generate')
             ->willReturn($generatedUri);
 
-        $this->response->expects(static::once())
+        $this->response->expects($this->once())
             ->method('getBody')
             ->willReturn($this->stream);
 
-        $this->stream->expects(static::once())
+        $this->stream->expects($this->once())
             ->method('getContents')
             ->willReturn(json_encode($contents));
 
-        $this->httpClient->expects(static::once())
+        $this->httpClient->expects($this->once())
             ->method('sendRequest')
             ->with('PUT', $generatedUri)
             ->willReturn($this->response);
@@ -229,26 +238,27 @@ class TrelloClientTest extends TestCase
     }
 
     /**
-     * @test
+     * @throws JsonException
      */
+    #[Test]
     public function it_can_send_delete_requests(): void
     {
         $generatedUri = 'path?key=value';
         $contents = ['contents'];
 
-        $this->uriGenerator->expects(static::once())
+        $this->uriGenerator->expects($this->once())
             ->method('generate')
             ->willReturn($generatedUri);
 
-        $this->response->expects(static::once())
+        $this->response->expects($this->once())
             ->method('getBody')
             ->willReturn($this->stream);
 
-        $this->stream->expects(static::once())
+        $this->stream->expects($this->once())
             ->method('getContents')
             ->willReturn(json_encode($contents));
 
-        $this->httpClient->expects(static::once())
+        $this->httpClient->expects($this->once())
             ->method('sendRequest')
             ->with('DELETE', $generatedUri)
             ->willReturn($this->response);

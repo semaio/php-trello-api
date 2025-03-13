@@ -13,7 +13,7 @@ use Semaio\TrelloApi\Api\AbstractApi;
  */
 class TokenWebhooksApi extends AbstractApi
 {
-    protected $path = 'tokens/#id#/webhooks';
+    protected string $path = 'tokens/#id#/webhooks';
 
     /**
      * Get webhooks related to a given token.

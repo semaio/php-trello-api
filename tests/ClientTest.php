@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Semaio\TrelloApi\Api\ActionApi;
@@ -21,9 +22,7 @@ use Semaio\TrelloApi\Client\TrelloClientInterface;
 
 class ClientTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_create_client(): void
     {
         $client = Client::create($this->getTrelloClientMock());
@@ -31,81 +30,61 @@ class ClientTest extends TestCase
         static::assertInstanceOf(Client::class, $client);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_action_api(): void
     {
         static::assertInstanceOf(ActionApi::class, $this->getClient()->getActionApi());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_board_api(): void
     {
         static::assertInstanceOf(BoardApi::class, $this->getClient()->getBoardApi());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_card_api(): void
     {
         static::assertInstanceOf(CardApi::class, $this->getClient()->getCardApi());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_checklist_api(): void
     {
         static::assertInstanceOf(ChecklistApi::class, $this->getClient()->getChecklistApi());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_list_api(): void
     {
         static::assertInstanceOf(CardListApi::class, $this->getClient()->getCardListApi());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_member_api(): void
     {
         static::assertInstanceOf(MemberApi::class, $this->getClient()->getMemberApi());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_notification_api(): void
     {
         static::assertInstanceOf(NotificationApi::class, $this->getClient()->getNotificationApi());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_organization_api(): void
     {
         static::assertInstanceOf(OrganizationApi::class, $this->getClient()->getOrganizationApi());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_token_api(): void
     {
         static::assertInstanceOf(TokenApi::class, $this->getClient()->getTokenApi());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_retrieve_webhook_api(): void
     {
         static::assertInstanceOf(WebhookApi::class, $this->getClient()->getWebhookApi());
@@ -116,7 +95,7 @@ class ClientTest extends TestCase
         return new Client($this->getTrelloClientMock());
     }
 
-    protected function getTrelloClientMock(): MockObject
+    protected function getTrelloClientMock(): MockObject|TrelloClientInterface
     {
         return $this->getMockBuilder(TrelloClientInterface::class)
             ->disableOriginalConstructor()

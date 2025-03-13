@@ -13,7 +13,7 @@ use Semaio\TrelloApi\Api\AbstractApi;
  */
 class MemberCardsApi extends AbstractApi
 {
-    protected $path = 'members/#id#/cards';
+    protected string $path = 'members/#id#/cards';
 
     /**
      * Get cards related to a given list.

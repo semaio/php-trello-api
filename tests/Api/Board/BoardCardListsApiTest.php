@@ -4,26 +4,24 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests\Api\Board;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Semaio\TrelloApi\Api\Board\BoardCardListsApi;
 use Semaio\TrelloApi\Exception\MissingArgumentException;
 use Semaio\TrelloApi\Tests\Api\ApiTestCase;
 
-/**
- * @group unit
- */
+#[Group('unit')]
 class BoardCardListsApiTest extends ApiTestCase
 {
-    protected $apiPath = 'boards/#id#/lists';
+    protected string $apiPath = 'boards/#id#/lists';
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetAllCardLists(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath())
             ->willReturn($response);
@@ -31,9 +29,7 @@ class BoardCardListsApiTest extends ApiTestCase
         static::assertEquals($response, $api->all($this->fakeParentId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldFilterCardListsWithDefaultFilter(): void
     {
         $response = ['response'];
@@ -41,7 +37,7 @@ class BoardCardListsApiTest extends ApiTestCase
         $defaultFilter = 'all';
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath().'/'.$defaultFilter)
             ->willReturn($response);
@@ -49,9 +45,7 @@ class BoardCardListsApiTest extends ApiTestCase
         static::assertEquals($response, $api->filter($this->fakeParentId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldFilterCardListsWithStringArgument(): void
     {
         $response = ['response'];
@@ -59,7 +53,7 @@ class BoardCardListsApiTest extends ApiTestCase
         $filter = 'open';
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath().'/open')
             ->willReturn($response);
@@ -67,9 +61,7 @@ class BoardCardListsApiTest extends ApiTestCase
         static::assertEquals($response, $api->filter($this->fakeParentId, $filter));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldFilterCardListsWithArrayArgument(): void
     {
         $response = ['response'];
@@ -77,7 +69,7 @@ class BoardCardListsApiTest extends ApiTestCase
         $filter = ['open', 'closed'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath().'/open,closed')
             ->willReturn($response);
@@ -85,9 +77,7 @@ class BoardCardListsApiTest extends ApiTestCase
         static::assertEquals($response, $api->filters($this->fakeParentId, $filter));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldCreateCardlist(): void
     {
         $data = [
@@ -95,7 +85,7 @@ class BoardCardListsApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('post')
             ->with($this->getPath())
             ->willReturn($data);
@@ -103,9 +93,7 @@ class BoardCardListsApiTest extends ApiTestCase
         static::assertEquals($data, $api->create($this->fakeParentId, $data));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldNotCreateCardlistWithoutName(): void
     {
         $this->expectException(MissingArgumentException::class);
@@ -115,12 +103,12 @@ class BoardCardListsApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::never())->method('post');
+        $api->expects($this->never())->method('post');
 
         $api->create($this->fakeParentId, $data);
     }
 
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return BoardCardListsApi::class;
     }

@@ -13,7 +13,7 @@ use Semaio\TrelloApi\Api\AbstractApi;
  */
 class CardStickersApi extends AbstractApi
 {
-    protected $path = 'cards/#id#/stickers';
+    protected string $path = 'cards/#id#/stickers';
 
     /**
      * Get stickers related to a given card.

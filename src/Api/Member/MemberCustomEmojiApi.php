@@ -16,5 +16,5 @@ use Semaio\TrelloApi\Api\AbstractApi;
  */
 class MemberCustomEmojiApi extends AbstractApi
 {
-    protected $path = 'members/#id#/customEmoji';
+    protected string $path = 'members/#id#/customEmoji';
 }

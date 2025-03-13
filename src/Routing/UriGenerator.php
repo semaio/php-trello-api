@@ -12,16 +12,10 @@ use Semaio\TrelloApi\Configuration\ConfigurationInterface;
 class UriGenerator implements UriGeneratorInterface
 {
     /**
-     * @var ConfigurationInterface
-     */
-    private $configuration;
-
-    /**
      * UriGenerator constructor.
      */
-    public function __construct(ConfigurationInterface $configuration)
+    public function __construct(private readonly ConfigurationInterface $configuration)
     {
-        $this->configuration = $configuration;
     }
 
     public static function create(ConfigurationInterface $configuration): UriGeneratorInterface

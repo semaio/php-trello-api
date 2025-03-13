@@ -17,7 +17,7 @@ class CardListApi extends AbstractApi
     /**
      * @see https://trello.com/docs/api/list/#get-1-lists-list-id-or-shortlink-field
      */
-    public static $fields = [
+    public static array $fields = [
         'name',
         'closed',
         'idBoard',
@@ -25,7 +25,7 @@ class CardListApi extends AbstractApi
         'subscribed',
     ];
 
-    protected $path = 'lists';
+    protected string $path = 'lists';
 
     /**
      * Find a list by id.

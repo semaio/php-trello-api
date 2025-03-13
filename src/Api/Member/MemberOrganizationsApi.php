@@ -14,7 +14,7 @@ use Semaio\TrelloApi\Api\OrganizationApi;
  */
 class MemberOrganizationsApi extends AbstractApi
 {
-    protected $path = 'members/#id#/organizations';
+    protected string $path = 'members/#id#/organizations';
 
     /**
      * Get organizations related to a given member.

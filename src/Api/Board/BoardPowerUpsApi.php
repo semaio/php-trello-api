@@ -20,5 +20,5 @@ class BoardPowerUpsApi extends AbstractApi
      *
      * @var string
      */
-    protected $path = 'boards/#id#/powerUps';
+    protected string $path = 'boards/#id#/powerUps';
 }

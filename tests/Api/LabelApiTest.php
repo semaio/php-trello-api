@@ -4,21 +4,19 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests\Api;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Semaio\TrelloApi\Api\LabelApi;
 use Semaio\TrelloApi\Exception\MissingArgumentException;
 
-/**
- * @group unit
- */
+#[Group('unit')]
 class LabelApiTest extends ApiTestCase
 {
-    protected $fakeLabelId = '5461efc60872da1eca5bf45c';
+    protected string $fakeLabelId = '5461efc60872da1eca5bf45c';
 
-    protected $apiPath = 'labels';
+    protected string $apiPath = 'labels';
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldShowLabel(): void
     {
         $response = [
@@ -26,7 +24,7 @@ class LabelApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->apiPath.'/'.$this->fakeLabelId)
             ->willReturn($response);
@@ -34,9 +32,7 @@ class LabelApiTest extends ApiTestCase
         static::assertEquals($response, $api->show($this->fakeLabelId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldCreateLabel(): void
     {
         $response = [
@@ -46,7 +42,7 @@ class LabelApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('post')
             ->with($this->apiPath)
             ->willReturn($response);
@@ -54,9 +50,7 @@ class LabelApiTest extends ApiTestCase
         static::assertEquals($response, $api->create($response));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldCreateLabelWithoutColor(): void
     {
         $response = [
@@ -65,7 +59,7 @@ class LabelApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('post')
             ->with($this->apiPath)
             ->willReturn($response);
@@ -73,9 +67,7 @@ class LabelApiTest extends ApiTestCase
         static::assertEquals($response, $api->create($response));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldNotCreateLabelWithoutBoardId(): void
     {
         $this->expectException(MissingArgumentException::class);
@@ -85,14 +77,12 @@ class LabelApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::never())->method('post');
+        $api->expects($this->never())->method('post');
 
         $api->create($data);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldNotCreateLabelWithoutName(): void
     {
         $this->expectException(MissingArgumentException::class);
@@ -102,14 +92,12 @@ class LabelApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::never())->method('post');
+        $api->expects($this->never())->method('post');
 
         $api->create($data);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldUpdateLabel(): void
     {
         $response = [
@@ -117,7 +105,7 @@ class LabelApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with($this->apiPath.'/'.$this->fakeLabelId)
             ->willReturn($response);
@@ -125,9 +113,7 @@ class LabelApiTest extends ApiTestCase
         static::assertEquals($response, $api->update($this->fakeLabelId, $response));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldSetFieldValueLabel(): void
     {
         $field = 'name';
@@ -137,7 +123,7 @@ class LabelApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with($this->apiPath.'/'.$this->fakeLabelId.'/'.$field)
             ->willReturn($response);
@@ -145,15 +131,13 @@ class LabelApiTest extends ApiTestCase
         static::assertEquals($response, $api->set($this->fakeLabelId, $field, $value));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldRemoveLabel(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('delete')
             ->with($this->apiPath.'/'.$this->fakeLabelId)
             ->willReturn($response);
@@ -161,7 +145,7 @@ class LabelApiTest extends ApiTestCase
         static::assertEquals($response, $api->remove($this->fakeLabelId));
     }
 
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return LabelApi::class;
     }

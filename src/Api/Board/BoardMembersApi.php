@@ -20,7 +20,7 @@ class BoardMembersApi extends AbstractApi
      *
      * @var string
      */
-    protected $path = 'boards/#id#/members';
+    protected string $path = 'boards/#id#/members';
 
     /**
      * Get a given board's members.

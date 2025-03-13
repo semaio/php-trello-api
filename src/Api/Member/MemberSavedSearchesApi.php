@@ -21,5 +21,5 @@ use Semaio\TrelloApi\Api\AbstractApi;
  */
 class MemberSavedSearchesApi extends AbstractApi
 {
-    protected $path = 'members/#id#/savedSearches';
+    protected string $path = 'members/#id#/savedSearches';
 }

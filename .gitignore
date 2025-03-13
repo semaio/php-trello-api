@@ -1,6 +1,7 @@
 /.php_cs.cache
 /.php-cs-fixer.cache
 /.phpunit.result.cache
+/.phpunit.cache
 /build
 /phpunit.xml
 /phpunit.xml.dist.bak

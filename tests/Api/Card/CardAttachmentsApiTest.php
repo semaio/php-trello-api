@@ -4,26 +4,24 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests\Api\Card;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Semaio\TrelloApi\Api\Card\CardAttachmentsApi;
 use Semaio\TrelloApi\Exception\MissingArgumentException;
 use Semaio\TrelloApi\Tests\Api\ApiTestCase;
 
-/**
- * @group unit
- */
+#[Group('unit')]
 class CardAttachmentsApiTest extends ApiTestCase
 {
-    protected $apiPath = 'cards/#id#/attachments';
+    protected string $apiPath = 'cards/#id#/attachments';
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetAllAttachments(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath())
             ->willReturn($response);
@@ -31,15 +29,13 @@ class CardAttachmentsApiTest extends ApiTestCase
         static::assertEquals($response, $api->all($this->fakeParentId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldShowAttachment(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath().'/'.$this->fakeId)
             ->willReturn($response);
@@ -47,9 +43,7 @@ class CardAttachmentsApiTest extends ApiTestCase
         static::assertEquals($response, $api->show($this->fakeParentId, $this->fakeId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldCreateAttachment(): void
     {
         $data = [
@@ -57,7 +51,7 @@ class CardAttachmentsApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('post')
             ->with($this->getPath())
             ->willReturn($data);
@@ -65,9 +59,7 @@ class CardAttachmentsApiTest extends ApiTestCase
         static::assertEquals($data, $api->create($this->fakeParentId, $data));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldNotCreateAttachmentWhenParamsIncomplete(): void
     {
         $this->expectException(MissingArgumentException::class);
@@ -75,20 +67,18 @@ class CardAttachmentsApiTest extends ApiTestCase
         $data = [];
 
         $api = $this->getApiMock();
-        $api->expects(static::never())->method('post');
+        $api->expects($this->never())->method('post');
 
         $api->create($this->fakeParentId, $data);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldRemoveAttachment(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('delete')
             ->with($this->getPath().'/'.$this->fakeId)
             ->willReturn($response);
@@ -96,15 +86,13 @@ class CardAttachmentsApiTest extends ApiTestCase
         static::assertEquals($response, $api->remove($this->fakeParentId, $this->fakeId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldSetAsCover(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with('cards/'.$this->fakeParentId.'/idAttachmentCover')
             ->willReturn($response);
@@ -112,7 +100,7 @@ class CardAttachmentsApiTest extends ApiTestCase
         static::assertEquals($response, $api->setAsCover($this->fakeParentId, $this->fakeId));
     }
 
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return CardAttachmentsApi::class;
     }

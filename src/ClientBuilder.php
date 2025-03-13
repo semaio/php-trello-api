@@ -19,17 +19,17 @@ class ClientBuilder
     /**
      * @var HttpClientInterface|null
      */
-    private $httpClient;
+    private ?HttpClientInterface $httpClient = null;
 
     /**
      * @var RequestFactoryInterface|null
      */
-    private $requestFactory;
+    private ?RequestFactoryInterface $requestFactory = null;
 
     /**
      * @var StreamFactoryInterface|null
      */
-    private $streamFactory;
+    private ?StreamFactoryInterface $streamFactory = null;
 
     public function getHttpClient(): HttpClientInterface
     {

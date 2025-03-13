@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests\Api;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Semaio\TrelloApi\Api\Board\BoardActionsApi;
 use Semaio\TrelloApi\Api\Board\BoardCardListsApi;
 use Semaio\TrelloApi\Api\Board\BoardCardsApi;
@@ -18,18 +20,14 @@ use Semaio\TrelloApi\Api\BoardApi;
 use Semaio\TrelloApi\Exception\InvalidArgumentException;
 use Semaio\TrelloApi\Exception\MissingArgumentException;
 
-/**
- * @group unit
- */
+#[Group('unit')]
 class BoardApiTest extends ApiTestCase
 {
-    protected $fakeBoardId = '5461efc60872da1eca5bf45c';
+    protected string $fakeBoardId = '5461efc60872da1eca5bf45c';
 
-    protected $apiPath = 'boards';
+    protected string $apiPath = 'boards';
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldShowBoard(): void
     {
         $response = [
@@ -37,7 +35,7 @@ class BoardApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->apiPath.'/'.$this->fakeBoardId)
             ->willReturn($response);
@@ -45,9 +43,7 @@ class BoardApiTest extends ApiTestCase
         static::assertEquals($response, $api->show($this->fakeBoardId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldCreateBoard(): void
     {
         $response = [
@@ -55,7 +51,7 @@ class BoardApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('post')
             ->with($this->apiPath)
             ->willReturn($response);
@@ -63,9 +59,7 @@ class BoardApiTest extends ApiTestCase
         static::assertEquals($response, $api->create($response));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldNotCreateBoardWithoutName(): void
     {
         $this->expectException(MissingArgumentException::class);
@@ -75,14 +69,12 @@ class BoardApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::never())->method('post');
+        $api->expects($this->never())->method('post');
 
         $api->create($data);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldUpdateBoard(): void
     {
         $response = [
@@ -90,7 +82,7 @@ class BoardApiTest extends ApiTestCase
         ];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with($this->apiPath.'/'.$this->fakeBoardId)
             ->willReturn($response);
@@ -98,9 +90,7 @@ class BoardApiTest extends ApiTestCase
         static::assertEquals($response, $api->update($this->fakeBoardId, $response));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetField(): void
     {
         $response = ['response'];
@@ -108,7 +98,7 @@ class BoardApiTest extends ApiTestCase
         $field = 'desc';
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->apiPath.'/'.$this->fakeBoardId.'/desc')
             ->willReturn($response);
@@ -116,22 +106,18 @@ class BoardApiTest extends ApiTestCase
         static::assertEquals($response, $api->getField($this->fakeBoardId, $field));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldNotGetUnexistingField(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
         $api = $this->getApiMock();
-        $api->expects(static::never())->method('get');
+        $api->expects($this->never())->method('get');
 
         $api->getField($this->fakeBoardId, 'unexisting');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldSetName(): void
     {
         $response = ['response'];
@@ -139,7 +125,7 @@ class BoardApiTest extends ApiTestCase
         $name = 'Test Board';
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with($this->apiPath.'/'.$this->fakeBoardId.'/name')
             ->willReturn($response);
@@ -147,9 +133,7 @@ class BoardApiTest extends ApiTestCase
         static::assertEquals($response, $api->setName($this->fakeBoardId, $name));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldSetDescription(): void
     {
         $response = ['response'];
@@ -157,7 +141,7 @@ class BoardApiTest extends ApiTestCase
         $description = 'Test Board Description';
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with($this->apiPath.'/'.$this->fakeBoardId.'/desc')
             ->willReturn($response);
@@ -165,9 +149,7 @@ class BoardApiTest extends ApiTestCase
         static::assertEquals($response, $api->setDescription($this->fakeBoardId, $description));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldSetClosed(): void
     {
         $response = ['response'];
@@ -175,7 +157,7 @@ class BoardApiTest extends ApiTestCase
         $closed = true;
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with($this->apiPath.'/'.$this->fakeBoardId.'/closed')
             ->willReturn($response);
@@ -183,9 +165,7 @@ class BoardApiTest extends ApiTestCase
         static::assertEquals($response, $api->setClosed($this->fakeBoardId, $closed));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldSetSubscribed(): void
     {
         $response = ['response'];
@@ -193,7 +173,7 @@ class BoardApiTest extends ApiTestCase
         $subscribed = true;
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with($this->apiPath.'/'.$this->fakeBoardId.'/subscribed')
             ->willReturn($response);
@@ -201,15 +181,13 @@ class BoardApiTest extends ApiTestCase
         static::assertEquals($response, $api->setSubscribed($this->fakeBoardId, $subscribed));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldSetViewed(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('post')
             ->with($this->apiPath.'/'.$this->fakeBoardId.'/markAsViewed')
             ->willReturn($response);
@@ -217,9 +195,7 @@ class BoardApiTest extends ApiTestCase
         static::assertEquals($response, $api->setViewed($this->fakeBoardId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldSetOrganization(): void
     {
         $response = ['response'];
@@ -227,7 +203,7 @@ class BoardApiTest extends ApiTestCase
         $orgId = $this->fakeId('organization');
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('put')
             ->with($this->apiPath.'/'.$this->fakeBoardId.'/idOrganization/'.$orgId)
             ->willReturn($response);
@@ -235,15 +211,13 @@ class BoardApiTest extends ApiTestCase
         static::assertEquals($response, $api->setOrganization($this->fakeBoardId, $orgId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetOrganization(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->apiPath.'/'.$this->fakeBoardId.'/organization')
             ->willReturn($response);
@@ -251,15 +225,13 @@ class BoardApiTest extends ApiTestCase
         static::assertEquals($response, $api->getOrganization($this->fakeBoardId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetOrganizationField(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->apiPath.'/'.$this->fakeBoardId.'/organization/name')
             ->willReturn($response);
@@ -267,28 +239,24 @@ class BoardApiTest extends ApiTestCase
         static::assertEquals($response, $api->getOrganizationField($this->fakeBoardId, 'name'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldNotGetUnexistingOrganizationField(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
         $api = $this->getApiMock();
-        $api->expects(static::never())->method('get');
+        $api->expects($this->never())->method('get');
 
         $api->getOrganizationField($this->fakeBoardId, 'unexisting');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetDeltas(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->apiPath.'/'.$this->fakeBoardId.'/deltas')
             ->willReturn($response);
@@ -296,15 +264,13 @@ class BoardApiTest extends ApiTestCase
         static::assertEquals($response, $api->getDeltas($this->fakeBoardId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetStars(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->apiPath.'/'.$this->fakeBoardId.'/boardStars')
             ->willReturn($response);
@@ -312,87 +278,67 @@ class BoardApiTest extends ApiTestCase
         static::assertEquals($response, $api->getStars($this->fakeBoardId));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetActionsApiObject(): void
     {
         static::assertInstanceOf(BoardActionsApi::class, $this->getApiMock()->actions());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetCardListsApiObject(): void
     {
         static::assertInstanceOf(BoardCardListsApi::class, $this->getApiMock()->lists());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetCardsApiObject(): void
     {
         static::assertInstanceOf(BoardCardsApi::class, $this->getApiMock()->cards());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetChecklistsApiObject(): void
     {
         static::assertInstanceOf(BoardChecklistsApi::class, $this->getApiMock()->checklists());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetLabelsApiObject(): void
     {
         static::assertInstanceOf(BoardLabelsApi::class, $this->getApiMock()->labels());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetMembersApiObject(): void
     {
         static::assertInstanceOf(BoardMembersApi::class, $this->getApiMock()->members());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetMembershipsApiObject(): void
     {
         static::assertInstanceOf(BoardMembershipsApi::class, $this->getApiMock()->memberships());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetMyPreferencesApiObject(): void
     {
         static::assertInstanceOf(BoardMyPreferencesApi::class, $this->getApiMock()->myPreferences());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetPowerUpsApiObject(): void
     {
         static::assertInstanceOf(BoardPowerUpsApi::class, $this->getApiMock()->powerUps());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetPreferencesApiObject(): void
     {
         static::assertInstanceOf(BoardPreferencesApi::class, $this->getApiMock()->preferences());
     }
 
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return BoardApi::class;
     }

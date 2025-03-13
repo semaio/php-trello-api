@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace Semaio\TrelloApi\Tests\Api\Member;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Semaio\TrelloApi\Api\Member\MemberActionsApi;
 use Semaio\TrelloApi\Tests\Api\ApiTestCase;
 
-/**
- * @group unit
- */
+#[Group('unit')]
 class MemberActionsApiTest extends ApiTestCase
 {
-    protected $apiPath = 'members/#id#/actions';
+    protected string $apiPath = 'members/#id#/actions';
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shouldGetAllActions(): void
     {
         $response = ['response'];
 
         $api = $this->getApiMock();
-        $api->expects(static::once())
+        $api->expects($this->once())
             ->method('get')
             ->with($this->getPath())
             ->willReturn($response);
@@ -30,7 +28,7 @@ class MemberActionsApiTest extends ApiTestCase
         static::assertEquals($response, $api->all($this->fakeParentId));
     }
 
-    protected function getApiClass()
+    protected function getApiClass(): string
     {
         return MemberActionsApi::class;
     }
