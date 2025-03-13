@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * ...
 
+## [2.0.0] - 2025-03-13
+
+### Changed
+
+* Support for PHP 8.2, 8.3, 8.4
+
+### Removed
+
+* Support for PHP versions older than PHP 8.2
+
 ## [1.3.0] - 2023-08-30
 
 ### Changed
